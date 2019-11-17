@@ -5,5 +5,5 @@ require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 
 get '/' do
-  'Time manager'
+  erb :index
 end
