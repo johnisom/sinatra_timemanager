@@ -134,3 +134,11 @@ post '/signout' do
   session.delete(:username)
   redirect '/'
 end
+
+get '/view' do
+  erb :view
+end
+
+get '/startstopundo' do
+  erb :startstopundo
+end
