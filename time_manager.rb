@@ -15,12 +15,7 @@ def flash(message, type = :neutral)
   session[:flash] = { message: message, type: type }
 end
 
-before '/' do
-  session[:username] = 'johnisom2001'
-end
-
 get '/' do
-  flash('hello')
   erb :index
 end
 
@@ -37,13 +32,19 @@ get '/signout' do
 end
 
 post '/signin' do
+  flash("You were successfully signed in, #{params[:username]}!", :success)
+  session[:username] = params[:username]
   redirect '/'
 end
 
 post '/signup' do
+  flash("Welcome aboard, #{params[:username]}!", :success)
+  session[:username] = params[:username]
   redirect '/'
 end
 
 post '/signout' do
+  flash("You were successfully signed out.", :success)
+  session.delete(:username)
   redirect '/'
 end
