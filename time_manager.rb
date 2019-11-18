@@ -76,6 +76,22 @@ get '/' do
   erb :index
 end
 
+get '/help' do
+  erb :help
+end
+
+get '/about' do
+  erb :about
+end
+
+get '/view' do
+  erb :view
+end
+
+get '/startstopundo' do
+  erb :startstopundo
+end
+
 get '/signin' do
   check_unauthorization
 
@@ -133,12 +149,4 @@ post '/signout' do
   flash("You were successfully signed out.", :success)
   session.delete(:username)
   redirect '/'
-end
-
-get '/view' do
-  erb :view
-end
-
-get '/startstopundo' do
-  erb :startstopundo
 end
