@@ -12,8 +12,10 @@
   <body>
     <header>
       <div class="flex around" id="main-header">
-	<% yield_content :header do %>
-	<%= erb :header, layout: false %>
+	<% if session[:username] %>
+	<%= erb :signed_in_header, layout: false %>
+	<% else %>
+	<%= erb :signed_out_header, layout: false %>
 	<% end %>
       </div>
 
