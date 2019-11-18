@@ -11,7 +11,7 @@ require 'yaml'
 
 configure do
   enable :sessions
-  set :session_secret, 'secret'
+  set :session_secret, development? ? 'secret' : SecureRandom.hex(100)
 end
 
 def flash(message, type = :neutral)
