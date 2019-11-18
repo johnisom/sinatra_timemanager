@@ -26,6 +26,11 @@ main {
     bottom: 10vh;
 }
 
+main > * {
+    max-height: 80vh;
+    overflow: auto;
+}
+
 header,
 footer {
     background-color: #00f5;
@@ -173,9 +178,4 @@ h2 {
 
 #undo-button {
     height: 57%;
-}
-
-#view {
-    max-height: 80vh;
-    overflow: auto;
 }
