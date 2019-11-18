@@ -10,35 +10,23 @@
   </head>
 
   <body>
+    <header>
+      <div class="flex around" id="main-header">
+	<% yield_content :header do %>
+	<%= erb :header, layout: false %>
+	<% end %>
+      </div>
+
+      <% if session[:flash] %>
+      <div class="flash <%= session[:flash][:type] %>">
+	<%= session.delete(:flash)[:message] %>
+      </div>
+      <% end %>
+    </header>
+
     <main class="center-child">
       <%= yield %>
     </main>
-
-    <header class="flex around">
-      <% yield_content :header do %>
-      <nav class="flex around">
-      	<a class="nav-link" href="/">
-      	  <div>View</div>
-      	</a>
-      	<a class="nav-link" href="/">
-      	  <div>Start/Stop/Undo</div>
-      	</a>
-      	<a class="nav-link" href="/signin">
-      	  <div>Sign In</div>
-      	</a>
-      </nav>
-      <% if session[:username] %>
-      <div class="flex around">
-	<div id="header-name">Signed in as
-	  <span class="copy"><%= session[:username] %></span>
-	</div>
-	<a class="nav-link" href="/signout">
-	  <div>Sign Out</div>
-	</a>
-      </div>
-      <% end %>
-      <% end %>
-    </header>
 
     <footer class="flex evenly">
       <a class="center-vertical" href="https://github.com/johnisom/sinatra_timemanager">
@@ -46,7 +34,7 @@
       </a>
       <div class="center-vertical">
   	John Isom
-  	<span class="copy">&copy; 2019</span>
+  	<small class="copy inherit-font">&copy; 2019</small>
       </div>
     </footer>
   </body>

@@ -1,0 +1,21 @@
+<nav class="flex around">
+  <a class="nav-link" href="/">
+    <div>View</div>
+  </a>
+  <a class="nav-link" href="/">
+    <div>Start/Stop/Undo</div>
+  </a>
+  <a class="nav-link" href="/signin">
+    <div>Sign In</div>
+  </a>
+</nav>
+<% if session[:username] %>
+<div class="flex around">
+  <div id="header-name">Signed in as
+    <span class="copy"><%= session[:username] %></span>
+  </div>
+  <a class="nav-link" href="/signout">
+    <div>Sign Out</div>
+  </a>
+</div>
+<% end %>

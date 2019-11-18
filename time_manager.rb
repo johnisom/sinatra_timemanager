@@ -11,7 +11,16 @@ configure do
   set :session_secret, 'secret'
 end
 
+def flash(message, type = :neutral)
+  session[:flash] = { message: message, type: type }
+end
+
+before '/' do
+  session[:username] = 'johnisom2001'
+end
+
 get '/' do
+  flash('hello')
   erb :index
 end
 
