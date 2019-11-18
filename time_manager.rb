@@ -73,7 +73,11 @@ def check_authorization
 end
 
 get '/' do
-  erb :index
+  erb :home
+end
+
+get '/home' do
+  redirect '/'
 end
 
 get '/help' do
@@ -82,35 +86,35 @@ end
 
 get '/about' do
   erb :about
-end
+  end
 
 get '/view' do
   erb :view
 end
 
-get '/startstopundo' do
-  erb :startstopundo
+get '/actions' do
+  erb :actions
 end
 
-get '/signin' do
+get '/sign-in' do
   check_unauthorization
 
-  erb :signin
+  erb :sign_in
 end
 
-get '/signup' do
+get '/sign-up' do
   check_unauthorization
 
-  erb :signup
+  erb :sign_up
 end
 
-get '/signout' do
+get '/sign-out' do
   check_authorization
 
-  erb :signout
+  erb :sign_out
 end
 
-post '/signin' do
+post '/sign-in' do
   check_unauthorization
 
   username = params[:username].strip
@@ -118,7 +122,7 @@ post '/signin' do
 
   if (error = error_for_signin(username, password))
     flash(error, :danger)
-    erb :signin
+    erb :sign_in
   else
     flash("You were successfully signed in.", :success)
     session[:username] = username
@@ -126,7 +130,7 @@ post '/signin' do
   end
 end
 
-post '/signup' do
+post '/sign-up' do
   check_unauthorization
 
   username = params[:username].strip
@@ -134,7 +138,7 @@ post '/signup' do
 
   if (error = error_for_signup(username, password))
     flash(error, :danger)
-    erb :signup
+    erb :sign-up
   else
     create_user(username, password)
     flash("Welcome aboard, #{username}!", :success)
@@ -143,7 +147,7 @@ post '/signup' do
   end
 end
 
-post '/signout' do
+post '/sign-out' do
   check_authorization
 
   flash("You were successfully signed out.", :success)
