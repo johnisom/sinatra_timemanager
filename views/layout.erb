@@ -10,7 +10,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <!-- <%= yield_content :header %> --> <!-- do %> -->
+      <!-- <nav class="flex evenly"> -->
+      <!-- 	<a class="nav-link" href="/"> -->
+      <!-- 	  <div>View</div> -->
+      <!-- 	</a> -->
+      <!-- 	<a class="nav-link" href="/"> -->
+      <!-- 	  <div>Start/Stop/Undo</div> -->
+      <!-- 	</a> -->
+      <!-- 	<a class="nav-link" href="/signin"> -->
+      <!-- 	  <div>Sign In</div> -->
+      <!-- 	</a> -->
+      <!-- </nav> -->
+      <!-- <% end %> -->
+    </header>
+    <main class="center-child">
+      <%= yield %>
+    </main>
+
+    <footer class="flex evenly">
+      <a class="center-vertical" href="https://github.com/johnisom/sinatra_timemanager">
+	<img width="50px" src="/images/github.png">
+      </a>
+      <div class="center-vertical">
+	John Isom
+	<span class="copy">&copy; 2019</span>
+      </div>
+    </footer>
   </body>
   
 </html>
