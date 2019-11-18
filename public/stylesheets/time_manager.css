@@ -77,6 +77,10 @@ footer {
     justify-content: space-around;
 }
 
+.between {
+    justify-content: space-between;
+}
+
 .center-vertical {
     margin-top: auto;
     margin-bottom: auto;
@@ -119,15 +123,14 @@ h2 {
     font-size: 2em;
 }
 
-#signin > *,
-#signup > *,
-#signout > * {
+.spaced-form > * {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .button,
-.signin-input {
+.input {
+    font-family: cursive, sans-serif;
     padding: 10px;
     background-color: #eee;
     border: solid black 1px;
@@ -154,4 +157,20 @@ h2 {
 .inherit-font {
     font-size: inherit;
     font-family: inherit;
+}
+
+.text-center {
+    text-align: center;
+}
+
+#start-stop-undo {
+    width: 80%;
+}
+
+#start-stop-undo > form {
+    width: 30%;
+}
+
+#undo-button {
+    height: 57%;
 }

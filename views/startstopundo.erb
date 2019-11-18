@@ -1,0 +1,18 @@
+<div class="flex between" id="start-stop-undo">
+  <form class="flex-vertical spaced-form" action="/start" method="POST">
+    <h2 class="text-center">Start</h2>
+    <input class="input" type="text" name="message" placeholder="Optional message...">
+    <button class="button">Start</button>
+  </form>
+
+  <form class="flex-vertical spaced-form" action="/stop" method="POST">
+    <h2 class="text-center">Stop</h2>
+    <input class="input" type="text" name="message" placeholder="Optional message...">
+    <button class="button">Stop</button>
+  </form>
+
+  <form class="flex-vertical spaced-form" action="/undo">
+    <h2 class="text-center">Undo</h2>
+    <button id="undo-button" class="button">Undo</button>
+  </form>
+</div>

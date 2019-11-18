@@ -1,7 +1,7 @@
-<form class="flex-vertical" id="signin" action="/signin" method="POST">
+<form class="flex-vertical spaced-form" action="/signin" method="POST">
   <h2>Sign In!</h2>
-  <input class="signin-input" type="text" name="username" placeholder="Username" value="<%= params[:username] %>">
-  <input class="signin-input" type="password" name="password" placeholder="Password">
-  <button class="signin-input button">Sign In</button>
+  <input class="input" type="text" name="username" placeholder="Username" value="<%= params[:username] %>">
+  <input class="input" type="password" name="password" placeholder="Password">
+  <button class="button">Sign In</button>
   <span>Don't have an account? <a href="/signup">Sign up!</a></span>
 </form>
