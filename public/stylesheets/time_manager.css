@@ -27,7 +27,7 @@ main {
 }
 
 main > * {
-    max-height: 80vh;
+    max-height: 73vh;
     overflow: auto;
 }
 
@@ -51,6 +51,7 @@ footer {
     font-size: 1.5em;
     font-family: monospace;
     text-align: center;
+    height: 7vh;
 }
 
 .danger {
@@ -96,8 +97,10 @@ footer {
     margin-right: auto;
 }
 
-.copy {
+.name {
     color: #e31b6d;
+    font-size: inherit;
+    font-family: inherit;
 }
 
 #main-header {
@@ -126,6 +129,10 @@ footer {
 h2 {
     font-family: monospace;
     font-size: 2em;
+}
+
+h3 {
+    font-family: cursive, sans-serif;
 }
 
 .spaced-form > * {
@@ -157,11 +164,6 @@ h2 {
     padding-left: 23px;
     padding-right: 23px;
     align-self: center;
-}
-
-.inherit-font {
-    font-size: inherit;
-    font-family: inherit;
 }
 
 .text-center {
