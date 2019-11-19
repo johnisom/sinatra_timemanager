@@ -217,3 +217,7 @@ h3 {
 .toc-anchor:hover {
     filter: brightness(200%);
 }
+
+.warning {
+    color: #f00;
+}
