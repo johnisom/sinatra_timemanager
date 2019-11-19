@@ -73,7 +73,7 @@ def check_authorization
 end
 
 get '/' do
-  erb session[:username] ? :signed_in_home : :home
+  erb session[:username] ? :signed_in_home : :signed_out_home
 end
 
 get '/home' do
