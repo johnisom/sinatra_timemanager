@@ -28,6 +28,7 @@ main {
 
 main > * {
     max-height: 73vh;
+    max-width: 70vw;
     overflow: auto;
 }
 
@@ -141,7 +142,8 @@ h3 {
 }
 
 .button,
-.input {
+.input,
+.toc {
     font-family: cursive, sans-serif;
     padding: 10px;
     background-color: #eee;
@@ -180,4 +182,38 @@ h3 {
 
 #undo-button {
     height: 57%;
+}
+
+.toc {
+    max-width: 50%;
+}
+
+.toc-title {
+    margin-top: 0px;
+    font-size: 30px;
+    font-family: monospace;
+    color: grey;
+}
+
+.toc-list {
+    list-style: none;
+}
+
+.toc-item,
+.toc-anchor {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.toc-anchor {
+    color: #700;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: cursive;
+}
+
+.toc-anchor:hover {
+    filter: brightness(200%);
 }
