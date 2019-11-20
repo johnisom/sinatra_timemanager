@@ -1,7 +1,8 @@
 *nub*
-.vscode
+.vscode/
 .#*
 *~
 *#
 \#*#
 credentials.yml
+data/
