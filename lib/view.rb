@@ -47,7 +47,7 @@ module Viewable
     timeframe_to = 0 if timeframe_to == '' || timeframe_to.nil?
 
     if timeframe_from.to_i <= timeframe_to.to_i
-      'Invalid range.'
+      '"from _ days ago" input must be greater than "up to _ days ago" input.'
     end
   end
 

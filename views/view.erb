@@ -8,24 +8,22 @@
     <div class="flex between">
 
       <div class="flex-vertical">
-	<label for="timeframe_from">timeframe_from</label>
-	<input class="input" name="timeframe_from" id="timeframe_from" type="number" min="1" value="<%= params[:timeframe_from] %>">
+	<input class="input" name="timeframe_from" id="timeframe_from" type="number" min="1" placeholder="from _ days ago" value="<%= params[:timeframe_from] %>">
       </div>
 
       <div class="flex-vertical">
-	<label for="timeframe_to">timeframe_to</label>
-	<input class="input" name="timeframe_to" id="timeframe_to" type="number" min="0" value="<%= params[:timeframe_to] %>">
+	<input class="input" name="timeframe_to" id="timeframe_to" type="number" min="0" placeholder="up to _ days ago" value="<%= params[:timeframe_to] %>">
       </div>
 
     </div>
 
-    <label for="view_option">view_option</label>
+    <h3>Select View Option</h3>
     <select class="input" name="view_option" id="view_option">
-      <option value="default"<%= ' selected' if params[:view_option] == 'default' %>>default</option>
-      <option value="daily-digest"<%= ' selected' if params[:view_option] == 'daily-digest' %>>daily-digest</option>
-      <option value="day-delimited"<%= ' selected' if params[:view_option] == 'day-delimited' %>>day-delimited</option>
-      <option value="weekly-digest"<%= ' selected' if params[:view_option] == 'weekly-digest' %>>weekly-digest</option>
-      <option value="week-delimited"<%= ' selected' if params[:view_option] == 'week-delimited' %>>week-delimited</option>
+      <option class="input" value="default"<%= ' selected' if params[:view_option] == 'default' %>>default</option>
+      <option class="input" value="daily-digest"<%= ' selected' if params[:view_option] == 'daily-digest' %>>daily-digest</option>
+      <option class="input" value="day-delimited"<%= ' selected' if params[:view_option] == 'day-delimited' %>>day-delimited</option>
+      <option class="input" value="weekly-digest"<%= ' selected' if params[:view_option] == 'weekly-digest' %>>weekly-digest</option>
+      <option class="input" value="week-delimited"<%= ' selected' if params[:view_option] == 'week-delimited' %>>week-delimited</option>
     </select>
 
     <button class="button">Apply Filters</button>
