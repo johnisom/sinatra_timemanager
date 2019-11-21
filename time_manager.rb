@@ -100,6 +100,9 @@ get '/view' do
   rescue NoViewDataError => e
     flash(e.message, :danger)
     redirect '/actions'
+  rescue InvalidFiltersError => e
+    flash(e.message, :danger)
+    erb :view
   end
 end
 
