@@ -9,6 +9,8 @@ require 'bcrypt'
 require 'securerandom'
 require 'yaml'
 
+require_relative 'lib/application'
+
 configure do
   enable :sessions
   set :session_secret, development? ? 'secret' : SecureRandom.hex(100)
@@ -89,11 +91,17 @@ get '/about' do
   end
 
 get '/view' do
-  erb :view
+  # erb :view
+  headers['Content-Type'] = 'text/plain'
+  session[:time_manager].pairs.to_s
 end
 
 get '/actions' do
   erb :actions
+end
+
+get '/undo' do
+  erb :undo
 end
 
 get '/sign-in' do
@@ -126,6 +134,7 @@ post '/sign-in' do
   else
     flash("You were successfully signed in.", :success)
     session[:username] = username
+    session[:time_manager] = TimeManager.new(username)
     redirect '/'
   end
 end
@@ -138,11 +147,12 @@ post '/sign-up' do
 
   if (error = error_for_signup(username, password))
     flash(error, :danger)
-    erb :sign-up
+    erb :sign_up
   else
     create_user(username, password)
     flash("Welcome aboard, #{username}!", :success)
     session[:username] = username
+    session[:time_manager] = TimeManager.new(username)
     redirect '/'
   end
 end
@@ -152,5 +162,26 @@ post '/sign-out' do
 
   flash("You were successfully signed out.", :success)
   session.delete(:username)
+  session.delete(:time_manager)
+  redirect '/'
+end
+
+post '/start' do
+  message = params[:message] unless params[:message].empty?
+  session[:time_manager].start(message: message)
+  flash('Time started.')
+  redirect '/'
+end
+
+post '/stop' do
+  message = params[:message] unless params[:message].empty?
+  session[:time_manager].stop(message: message)
+  flash('Time stopped.')
+  redirect '/'
+end
+
+post '/undo' do
+  session[:time_manager].undo
+  flash('Last entry undone.')
   redirect '/'
 end
