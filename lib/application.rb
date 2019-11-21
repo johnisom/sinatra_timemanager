@@ -3,6 +3,7 @@
 require 'fileutils'
 
 require_relative 'entry'
+require_relative 'view'
 
 class StartTwiceError < StandardError
 end
@@ -15,6 +16,8 @@ end
 
 # Main app that handles everything
 class TimeManager
+  include Viewable
+
   DATA_PATH = File.expand_path('./data')
 
   attr_reader :pairs
@@ -51,9 +54,7 @@ class TimeManager
     end
   end
 
-  def view(timeframe_from: nil, timeframe_to: nil, option: :default)
-
-  end
+  private
 
   def update_file
     filepath = File.join(DATA_PATH, "#{@username}.yml")
