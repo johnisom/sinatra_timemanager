@@ -1,0 +1,24 @@
+<div class="flex between" id="view">
+  <pre><%= @content %></pre>
+
+  <form class="flex-vertical spaced-form" action="/view">
+    <h2>Filter Results</h2>
+
+    <label for="timeframe_from">timeframe_from</label>
+    <input class="input" name="timeframe_from" id="timeframe_from" type="number" min="0">
+
+    <label for="timeframe_to">timeframe_to</label>
+    <input class="input" name="timeframe_to" id="timeframe_to" type="number" min="0">
+
+    <label for="view_option">view_option</label>
+    <select class="input" name="view_option" id="view_option">
+      <option value="default">default</option>
+      <option value="daily-digest">daily-digest</option>
+      <option value="day-delimited">day-delimited</option>
+      <option value="weekly-digest">weekly-digest</option>
+      <option value="week-delimited">week-delimited</option>
+    </select>
+
+    <button class="button">Apply Filters</button>
+  </form>
+</div>

@@ -93,8 +93,10 @@ get '/about' do
 
 get '/view' do
   begin
-    headers 'Content-Type' => 'text/plain'
-    session[:time_manager].view
+    @content = session[:time_manager].view(params[:timeframe_from],
+                                           params[:timeframe_to],
+                                           params[:view_option])
+    erb :view
   rescue NoViewDataError => e
     flash(e.message, :danger)
     redirect '/actions'

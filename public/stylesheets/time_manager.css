@@ -221,3 +221,7 @@ h3 {
 .warning {
     color: #f00;
 }
+
+#view {
+    width: 100%;
+}
