@@ -170,18 +170,18 @@ post '/start' do
   message = params[:message] unless params[:message].empty?
   session[:time_manager].start(message: message)
   flash('Time started.')
-  redirect '/'
+  redirect '/actions'
 end
 
 post '/stop' do
   message = params[:message] unless params[:message].empty?
   session[:time_manager].stop(message: message)
   flash('Time stopped.')
-  redirect '/'
+  redirect '/actions'
 end
 
 post '/undo' do
   session[:time_manager].undo
   flash('Last entry undone.')
-  redirect '/'
+  redirect '/actions'
 end
