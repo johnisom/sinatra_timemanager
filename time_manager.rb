@@ -92,6 +92,8 @@ get '/about' do
   end
 
 get '/view' do
+  check_authorization
+
   begin
     @content = session[:time_manager].view(params[:timeframe_from],
                                            params[:timeframe_to],
@@ -107,10 +109,14 @@ get '/view' do
 end
 
 get '/actions' do
+  check_authorization
+
   erb :actions
 end
 
 get '/undo' do
+  check_authorization
+
   erb :undo
 end
 
