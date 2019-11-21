@@ -92,9 +92,13 @@ get '/about' do
   end
 
 get '/view' do
-  # erb :view
-  headers['Content-Type'] = 'text/plain'
-  session[:time_manager].pairs.to_s
+  begin
+    headers 'Content-Type' => 'text/plain'
+    session[:time_manager].view
+  rescue NoViewDataError => e
+    flash(e.message, :danger)
+    redirect '/actions'
+  end
 end
 
 get '/actions' do

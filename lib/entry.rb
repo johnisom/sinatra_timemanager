@@ -8,11 +8,16 @@ class Entry
     @time = Time.now
     @message = message
   end
+
+  def to_s
+    "#{time.strftime('%a %Y-%m-%d %H:%M:%S')} -> #{message}"
+  end
 end
 
 # Pair class that has a start and a stop
 class Pair
-  attr_accessor :start, :stop
+  attr_accessor :start
+  attr_writer :stop
 
   def initialize(start:, stop: nil)
     @start = start
@@ -20,6 +25,10 @@ class Pair
   end
 
   def complete?
-    start && stop
+    @start && @stop
+  end
+
+  def stop
+    @stop || Entry.new('CURRENT')
   end
 end
