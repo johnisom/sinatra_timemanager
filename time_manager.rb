@@ -21,6 +21,7 @@ def flash(message, type = :neutral)
 end
 
 def credentials
+  FileUtils.touch('credentials.yml')
   Psych.load_file('credentials.yml')
 end
 
