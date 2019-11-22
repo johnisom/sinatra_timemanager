@@ -225,3 +225,64 @@ h3 {
 #view {
     width: 100%;
 }
+
+#view-form {
+    width: 30%;
+}
+
+.timeframe {
+    width: 50%;
+}
+
+.start,
+.stop {
+    font-size; 1em;
+}
+
+/* .title { */
+/*     font-family: consolas, monospace, sans-serif; */
+/* } */
+
+.start > .title,
+.stop > .title {
+    color: #805780;
+}
+
+.session-time > .title {
+    color: #008064;
+}
+
+/* .time, */
+/* .message { */
+/*     font-family: consolas, monospace, sans-serif; */
+/* } */
+
+.time {
+    color: #0f0;
+}
+
+.message {
+    color: #ff6400;
+}
+
+.session-time > .content {
+    color: #ff0;
+}
+
+.session * {
+    font-family: consolas, monospace, sans-serif;
+}
+
+.session {
+    margin-bottom: 1em;
+}
+
+#view-content {
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 5px #463232;
+    width: 60%;
+    background-color: #463232;
+    overflow: auto;
+}

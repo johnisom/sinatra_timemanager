@@ -30,8 +30,8 @@ module Viewable
 
   def default(timeframe_from, timeframe_to)
     @pairs.map do |pair|
-      "Start: #{pair.start}\nStop: #{pair.stop}"
-    end.join("\n\n")
+      %(<div class="session">#{pair.to_html}</div>)
+    end.join
   end
 
   def daily_digest(timeframe_from, timeframe_to); end

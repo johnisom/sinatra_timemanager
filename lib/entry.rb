@@ -12,6 +12,22 @@ class Entry
   def to_s
     "#{time.strftime('%a %Y-%m-%d %H:%M:%S')} -> #{message}"
   end
+
+  def to_html
+    %(<span class="time">#{time_str}</span>) +
+      %(<span class="message">#{message_str}</span>)
+  end
+
+  private
+
+  def time_str
+    time.strftime('%a %Y-%m-%d %H:%M:%S')
+  end
+
+  def message_str
+    message ? " -> #{message}" : ''
+    message && " -> #{message}" || ''
+  end
 end
 
 # Pair class that has a start and a stop
@@ -30,5 +46,26 @@ class Pair
 
   def stop
     @stop || Entry.new('CURRENT')
+  end
+
+  def to_html
+    start_html + stop_html + session_html
+  end
+
+  private
+
+  def start_html
+    %(<div class="start"><span class="title">Start: </span>) +
+      %(<span class="content">#{start.to_html}</span></div>)
+  end
+
+  def stop_html
+    %(<div class="stop"><span class="title">Stop: </span>) +
+      %(<span class="content">#{stop.to_html}</span></div>)
+  end
+
+  def session_html
+    %(<div class="session-time"><span class="title">Session Time: </span>)+
+      %(<span class="content">03:43:13</span></div>)
   end
 end
