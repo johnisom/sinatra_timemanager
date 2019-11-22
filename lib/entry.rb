@@ -53,14 +53,18 @@ class Pair
   end
 
   def session_time
-    sec = (stop.time - start.time).to_i
+    (stop.time - start.time).to_i
+  end
+
+  private
+
+  def session_time_str
+    sec = session_time
     hour = sec / 3600
     min = sec / 60 % 60
     sec = sec % 60
     format('%<hour>02d:%<min>02d:%<sec>02d', hour: hour, min: min, sec: sec)
   end
-
-  private
 
   def start_html
     %(<div class="start"><span class="title">Start: </span>) +
@@ -74,6 +78,6 @@ class Pair
 
   def session_html
     %(<div class="session-time"><span class="title">Session Time: </span>)+
-      %(<span class="content">#{session_time}</span></div>)
+      %(<span class="content">#{session_time_str}</span></div>)
   end
 end
