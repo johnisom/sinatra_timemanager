@@ -12,6 +12,10 @@ module Viewable
   
   def view(timeframe_from, timeframe_to, view_option)
     raise NoViewDataError, "Can't view without any data!" if @pairs.empty?
+
+    timeframe_from, timeframe_to = convert_timeframes(timeframe_from,
+                                                      timeframe_to)
+
     if (error = error_for_timeframes(timeframe_from, timeframe_to))
       raise InvalidFiltersError, error
     end
@@ -29,7 +33,9 @@ module Viewable
   private
 
   def default(timeframe_from, timeframe_to)
-    @pairs.map do |pair|
+    from_idx = timeframe_from >= days.size ? 0 : -(timeframe_from + 1)
+    to_idx = -(timeframe_to + 1)
+    days[from_idx..to_idx].flatten.map do |pair|
       %(<div class="session">#{pair.to_html}</div>)
     end.join
   end
@@ -42,16 +48,27 @@ module Viewable
 
   def week_delimited(timeframe_from, timeframe_to); end
 
-  def error_for_timeframes(timeframe_from, timeframe_to)
-    timeframe_from = max_timeframe if timeframe_from == '' || timeframe_from.nil?
-    timeframe_to = 0 if timeframe_to == '' || timeframe_to.nil?
+  def convert_timeframes(timeframe_from, timeframe_to)
+    timeframe_to = timeframe_to.to_i
+    timeframe_from = timeframe_from.to_i
+    timeframe_from = max_timeframe if timeframe_from.zero?
 
-    if timeframe_from.to_i <= timeframe_to.to_i
-      '"from _ days ago" input must be greater than "up to _ days ago" input.'
+    [timeframe_from, timeframe_to]
+  end
+
+  def error_for_timeframes(timeframe_from, timeframe_to)
+    if timeframe_from < timeframe_to
+      '"from _ days ago" input must not be less than "up to _ days ago" input.'
     end
   end
 
   def max_timeframe
-    (Time.now.to_date - @pairs.first.start.time.to_date + 1).to_i.to_s
+    (Time.now.to_date - @pairs.first.start.time.to_date + 1).to_i
+  end
+
+  def days
+    @pairs.chunk do |pair|
+      pair.start.time.day
+    end.map(&:last)
   end
 end

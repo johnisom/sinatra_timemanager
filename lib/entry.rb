@@ -53,7 +53,7 @@ class Pair
   end
 
   def session_time
-    (stop.time - start.time).to_i
+    (stop.time - start.time).round
   end
 
   private
