@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'yaml'
 
 require_relative 'entry'
 require_relative 'view'

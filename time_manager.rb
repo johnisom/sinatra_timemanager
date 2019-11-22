@@ -7,7 +7,6 @@ require 'tilt/erubis'
 require 'bcrypt'
 
 require 'securerandom'
-require 'yaml'
 
 require_relative 'lib/application'
 
