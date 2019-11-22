@@ -50,15 +50,18 @@ module Viewable
 
   def convert_timeframes(timeframe_from, timeframe_to)
     timeframe_to = timeframe_to.to_i
-    timeframe_from = timeframe_from.to_i
-    timeframe_from = max_timeframe if timeframe_from.zero?
+    timeframe_from = if timeframe_from.nil? || timeframe_from == ''
+                       max_timeframe
+                     else
+                       timeframe_from.to_i
+                     end
 
     [timeframe_from, timeframe_to]
   end
 
   def error_for_timeframes(timeframe_from, timeframe_to)
     if timeframe_from < timeframe_to
-      '"from _ days ago" input must not be less than "up to _ days ago" input.'
+      'Invalid timeframe range.'
     end
   end
 

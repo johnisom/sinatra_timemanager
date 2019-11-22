@@ -286,3 +286,11 @@ h3 {
     background-color: #463232;
     overflow: auto;
 }
+
+#shrug {
+    position: relative;
+    top: 35%;
+    text-align: center;
+    font-size: 3em;
+    color: #e31b6d;
+}

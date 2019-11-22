@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 require 'sinatra'
@@ -7,6 +8,7 @@ require 'tilt/erubis'
 require 'bcrypt'
 
 require 'securerandom'
+require 'yaml'
 
 require_relative 'lib/application'
 
@@ -103,6 +105,7 @@ get '/view' do
     redirect '/actions'
   rescue InvalidFiltersError => e
     flash(e.message, :danger)
+    @content = '<div id="shrug">¯\_(ツ)_/¯</div>'
     erb :view
   end
 end
