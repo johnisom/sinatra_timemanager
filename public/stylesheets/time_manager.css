@@ -128,12 +128,17 @@ footer {
 }
 
 h2 {
-    font-family: monospace;
+    font-family: monospace, sans-serif;
     font-size: 2em;
 }
 
 h3 {
     font-family: cursive, sans-serif;
+}
+
+h4 {
+    font-family: "Courier New", courier, consolas, monospace, sans-serif;
+    font-size: 1.15em;
 }
 
 .spaced-form > * {
@@ -207,14 +212,31 @@ h3 {
     margin-bottom: 5px;
 }
 
-.toc-anchor {
-    color: #700;
-    font-size: 20px;
+.toc-anchor,
+.toc-subanchor,
+.toc-subsubanchor{
     text-decoration: none;
     font-family: cursive;
 }
 
-.toc-anchor:hover {
+.toc-anchor {
+    color: #700;
+    font-size: 20px;
+}
+
+.toc-subanchor {
+    color: #007;
+    font-size: 18px;
+}
+
+.toc-subsubanchor {
+    color: #070;
+    font-size: 15px;
+}
+
+.toc-anchor:hover,
+.toc-subanchor:hover,
+.toc-subsubanchor:hover {
     filter: brightness(200%);
 }
 
