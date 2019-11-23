@@ -152,7 +152,7 @@ post '/sign-in' do
   else
     flash("You were successfully signed in.", :success)
     session[:username] = username
-    session[:time_manager] = TimeManager.new(username)
+    session[:time_manager] = TM.new(username)
     redirect '/'
   end
 end
@@ -170,7 +170,7 @@ post '/sign-up' do
     create_user(username, password)
     flash("Welcome aboard, #{username}!", :success)
     session[:username] = username
-    session[:time_manager] = TimeManager.new(username)
+    session[:time_manager] = TM.new(username)
     redirect '/'
   end
 end

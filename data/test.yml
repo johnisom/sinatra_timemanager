@@ -55,8 +55,3 @@
   stop: !ruby/object:Entry
     time: 2019-11-22 14:00:00.000000000 -07:00
     message: 
-- !ruby/object:Session
-  start: !ruby/object:Entry
-    time: 2019-11-23 09:54:51.599646700 -07:00
-    message: 
-  stop: 

@@ -17,7 +17,7 @@ class MaxUndoError < StandardError
 end
 
 # Main app that handles everything
-class TimeManager
+class TM
   include Viewable
 
   DATA_PATH = File.expand_path('./data')
