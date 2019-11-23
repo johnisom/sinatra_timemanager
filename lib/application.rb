@@ -4,7 +4,8 @@ require 'fileutils'
 require 'yaml'
 
 require_relative 'entry'
-require_relative 'view'
+require_relative 'session'
+require_relative 'viewable'
 
 class StartTwiceError < StandardError
 end
@@ -21,50 +22,51 @@ class TimeManager
 
   DATA_PATH = File.expand_path('./data')
 
-  attr_reader :pairs
+  attr_reader :sessions
   
   def initialize(name)
     @username = name.gsub(/\W/, '')
     touchfile(@username)
-    @pairs = Psych.load_file(File.join(DATA_PATH, "#{@username}.yml"))
-    @pairs = [] unless @pairs.instance_of?(Array)
+    @sessions = Psych.load_file(File.join(DATA_PATH, "#{@username}.yml"))
+    @sessions = [] unless @sessions.instance_of?(Array)
   end
   
   def start(message: nil)
-    raise StartTwiceError, "Can't start twice in a row!" if !last_pair.complete?
+    raise StartTwiceError, "Can't start twice in a row!" if !last_session.complete?
     
-    @pairs << Pair.new(start: Entry.new(message))
+    @sessions << Session.new(start: Entry.new(message))
 
     update_file
   end
 
   def stop(message: nil)
-    raise StopTwiceError, "Can't stop twice in a row!" if last_pair.complete?
+    raise StopTwiceError, "Can't stop twice in a row!" if last_session.complete?
 
-    last_pair.stop = Entry.new(message)
+    last_session.stop = Entry.new(message)
     update_file
   end
 
   def undo
-    raise MaxUndoError, "Can't undo any more!" if @pairs.empty?
+    raise MaxUndoError, "Can't undo any more!" if @sessions.empty?
       
-    if last_pair.complete?
-      last_pair.stop = nil
+    if last_session.complete?
+      last_session.stop = nil
     else
-      @pairs.pop
+      @sessions.pop
     end
+    update_file
   end
 
   private
 
   def update_file
     filepath = File.join(DATA_PATH, "#{@username}.yml")
-    content = Psych.dump(@pairs)
+    content = Psych.dump(@sessions)
     File.write(filepath, content)
   end
 
-  def last_pair
-    @pairs.last || Pair.new(start: Entry.new(nil), stop: Entry.new(nil))
+  def last_session
+    @sessions.last || Session.new(start: Entry.new(nil), stop: Entry.new(nil))
   end
 
   def touchfile(name)

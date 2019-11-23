@@ -1,61 +1,61 @@
 ---
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-15 08:00:00.000000000 -07:00
     message: This is a start message
   stop: !ruby/object:Entry
     time: 2019-11-15 18:00:00.000000000 -07:00
     message: And this is an end message
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-16 08:00:00.000000000 -07:00
     message: Study LS
   stop: !ruby/object:Entry
     time: 2019-11-16 18:00:00.000000000 -07:00
     message: Dinner time
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-17 08:00:00.000000000 -07:00
     message: Messages are
   stop: !ruby/object:Entry
     time: 2019-11-17 18:00:00.000000000 -07:00
     message: Completely
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-18 08:00:00.000000000 -07:00
     message: Optional!
   stop: !ruby/object:Entry
     time: 2019-11-18 18:00:00.000000000 -07:00
     message: 
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-19 08:00:00.000000000 -07:00
     message: 
   stop: !ruby/object:Entry
     time: 2019-11-19 18:00:00.000000000 -07:00
     message: Time to stop
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-20 08:00:00.000000000 -07:00
     message: start up now
   stop: !ruby/object:Entry
     time: 2019-11-20 18:00:00.000000000 -07:00
     message: 
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-21 08:00:00.000000000 -07:00
     message: work on the-time-manager.herokuapp.com
   stop: !ruby/object:Entry
     time: 2019-11-21 18:00:00.000000000 -07:00
     message: 
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-22 08:00:00.000000000 -07:00
     message: 
   stop: !ruby/object:Entry
     time: 2019-11-22 14:00:00.000000000 -07:00
     message: 
-- !ruby/object:Pair
+- !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-23 09:54:51.599646700 -07:00
     message: 
