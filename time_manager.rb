@@ -10,7 +10,7 @@ require 'bcrypt'
 require 'securerandom'
 require 'yaml'
 
-require_relative 'lib/application'
+require_relative 'lib/tm'
 
 configure do
   enable :sessions

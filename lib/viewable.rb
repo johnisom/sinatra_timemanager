@@ -11,7 +11,7 @@ module Viewable
   SEC_IN_DAY = 24 * 60 * 60
   
   def view(timeframe_from, timeframe_to, view_option)
-    raise NoViewDataError, "Can't view without any data!" if @pairs.empty?
+    raise NoViewDataError, "Can't view without any data!" if @sessions.empty?
 
     timeframe_from, timeframe_to = convert_timeframes(timeframe_from,
                                                       timeframe_to)
@@ -35,8 +35,8 @@ module Viewable
   def default(timeframe_from, timeframe_to)
     from_idx = timeframe_from >= days.size ? 0 : -(timeframe_from + 1)
     to_idx = -(timeframe_to + 1)
-    days[from_idx..to_idx].flatten.map do |pair|
-      %(<div class="session">#{pair.to_html}</div>)
+    days[from_idx..to_idx].flatten.map do |session|
+      %(<div class="session">#{session.to_html}</div>)
     end.join
   end
 
@@ -66,12 +66,12 @@ module Viewable
   end
 
   def max_timeframe
-    (Time.now.to_date - @pairs.first.start.time.to_date + 1).to_i
+    (Time.now.to_date - @sessions.first.start.time.to_date + 1).to_i
   end
 
   def days
-    @pairs.chunk do |pair|
-      pair.start.time.day
+    @sessions.chunk do |session|
+      session.start.time.day
     end.map(&:last)
   end
 end
