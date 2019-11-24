@@ -1,155 +1,147 @@
-<div class="flex-vertical between">
-    <h1>Help</h1>
-    <div class="toc">
-      <p class="toc-title">Table of contents</p>
-      <ul class="toc-list">
-	<li class="toc-item">
-	  <a class="toc-anchor" href="#view">View</a>
-	  <ul class="toc-list">
-	    <li>
-	      <a class="toc-subanchor" href="#timeframe">Timeframe</a>
-	    </li>
-	    <li>
-	      <a class="toc-subanchor" href="#view-options">View Options<e/a>
-	      <ul class="toc-list">
-		<li>
-		  <a class="toc-subsubanchor" href="#default">Default</a>
-		</li>
-		<li>
-		  <a class="toc-subsubanchor" href="#daily-digest">
-		    Daily Digest</a>
-		</li>
-		<li>
-		  <a class="toc-subsubanchor" href="#day-delimited">
-		    Day Delimited</a>
-		</li>
-		<li>
-		  <a class="toc-subsubanchor" href="#weekly-digest">
-		    Weekly Digest</a>
-		</li>
-		<li>
-		  <a class="toc-subsubanchor" href="#week-delimited">
-		    Week Delimited</a>
-		</li>
-	      </ul>
-	    </li>
-	  </ul>
-	</li>
-	<li class="toc-item">
-	  <a class="toc-anchor" href="#start">Start</a>
-	</li>
-	<li class="toc-item">
-	  <a class="toc-anchor" href="#stop">Stop</a>
-	</li>
-	<li class="toc-item">
-	  <a class="toc-anchor" href="#undo">Undo</a>
-	</li>
-      </ul>
-    </div>
-
-    <p>Welcome! This application is a time management system targeted towards the
-      student. Of course, anybody can use and benefit from this application, and
-      I encourage you to do so. This help page has 4 sections, each relating to
-      the 4 different &quot;commands&quot; one can perform whilst using this app.
-      To find out more about this application and its creator, check out the
-      <i>About</i> section.</p>
-
-  <div id="view">
-    <h2>View</h2>
-    <p>The view command is the most complex of all of the commands in this
-      application. It allows you to view your previous log entries in a multitude
-      of different ways with a timeframe filter and additional view options.</p>
-
-    <h3 id="timeframe">Timeframe</h3>
-    <p>With the timeframe selection, you can select the timeframe (in days) that
-      you wish to view data for. It is inclusive on both ends, so if you chose
-      &quot;from 5 days ago to 3 days ago&quot; and today&apos;s date is Jan.
-      10th, you will see reports for the 5th, 6th, and 7th of January. If one or
-      both of the timeframe range endpoints is not specified, it automatically
-      calculates the correct timeframe for you. For example, if you don&apos;t
-      enter a value into the &quot;from _ days ago&quot; input, it will report
-      from the first date that you logged a start time. If you don&apos;t enter
-      a value into the &quot;up to _ days ago&quot; input, the timeframe will
-      automatically use 0 as that value, reporting all the way up to (and
-      including) the current day.</p>
-
-    <h3 id="view-options">View Options</h3>
-    <p>These are the 5 view options that all report your data/logging history in
-      nice, clean, easy-to-understand ways.</p>
-
-    <h4 id="default">Default</h4>
-    <p>The most general option, <i>Default</i> reports your data just as you
-      entered it&mdash;a start time, a stop time, and a message, along with time
-      elapsed in that session. All sessions are reported, along with all start/
-      stop messages and session time totals. Along with all of that, there is a
-      handy average time elapsed per day and a total elapsed time report.</p>
-    <p>This view option is the best suited for smaller timeframes where you wish
-      to see all the info of each session without all the extra day-delimiting
-      reports found in <i>Day Delimited</i>.</p>
-
-    <h4 id="daily-digest">Daily Digest</h4>
-    <p>This view option shows only the total time studied per day. There are no
-      session times (or even start/stop messages) reported. Just the pure, raw,
-      daily time for quicker, more efficient viewing</p>
-    <p>If there were 16 sessions spread throughout 5 days, <i>Daily Digest</i>
-      would only report the total times for each of the 5 days, condensing all
-      sessions of that day into one daily time.</p>
-
-    <h4 id="day-delimited">Day Delimited</h4>
-    <p>This option is very similar to <i>Default</i>, with the addition of a
-      daily summary reported at the end of each days&apos; sessions, effectively
-      delimiting each day with a little summary.</p>
-    <p>This is if you want to see the individual sessions (with the start/stop
-      messages) as well as how much time you logged for that day.</p>
-
-    <h4 id="weekly-digest">Weekly Digest</h4>
-    <p><i>Weekly Digest</i> is similar to <i>Daily Digest</i> with one key
-      distinction. Instead of reporting condensed time summaries per day,
-      <i>Weekly Digest</i> reports for every whole week (7 days) of logged time.
-      As such, this command is really only useful if you have been steadily using
-      the application for several weeks.</p>
-    <p>This view option reports a weekly average at the end, specifying the
-      average hours studied per week.</p>
-
-    <h4 id="week-delimited">Week Delimited</h4>
-    <p>A combination of daily summaries and week delimitations, this view option
-      is one of the most helpful. Like <i>Daily Digest</i>, it only reports total
-      time per day instead of per individual session, drastically reducing the
-      visual bloat and allowing you to clearly and precisely see exactly what you
-      want. However, unlike <i>Daily Digest</i>, this option reports a weekly
-      summary that delimits every 7 days reported with total week study time.</p>
-    <p>Like <i>Weekly Digest</i>, this view option also reports a weekly average
-      at the end, right before the total time report.</p>
+<div id="help" class="flex-vertical between">
+  <h1>Help</h1>
+  <div class="toc">
+    <span class="toc-title">Table of contents</span>
+    <ul class="toc-list">
+      <li class="toc-item">
+	<a class="toc-anchor" href="#view">View</a>
+	<ul class="toc-list">
+	  <li>
+	    <a class="toc-subanchor" href="#timeframe">Timeframe</a>
+	  </li>
+	  <li>
+	    <a class="toc-subanchor" href="#view-options">View Options</a>
+	    <ul class="toc-list">
+	      <li>
+		<a class="toc-subsubanchor" href="#default">Default</a>
+	      </li>
+	      <li>
+		<a class="toc-subsubanchor" href="#daily-digest">
+		  Daily Digest</a>
+	      </li>
+	      <li>
+		<a class="toc-subsubanchor" href="#day-delimited">
+		  Day Delimited</a>
+	      </li>
+	      <li>
+		<a class="toc-subsubanchor" href="#weekly-digest">
+		  Weekly Digest</a>
+	      </li>
+	      <li>
+		<a class="toc-subsubanchor" href="#week-delimited">
+		  Week Delimited</a>
+	      </li>
+	    </ul>
+	  </li>
+	</ul>
+      </li>
+      <li class="toc-item">
+	<a class="toc-anchor" href="#start">Start</a>
+      </li>
+      <li class="toc-item">
+	<a class="toc-anchor" href="#stop">Stop</a>
+      </li>
+      <li class="toc-item">
+	<a class="toc-anchor" href="#undo">Undo</a>
+      </li>
+    </ul>
   </div>
 
-  <div id="start">
-    <h2>Start</h2>
-    <p>The start command is the command that you use when you wish to start your
-      study/work session. It takes an optional message to be attatched to that
-      specific log entry (see <a href="/about"><i>About</i></a> for more info)
-      that can be used to add a note to let you know what exactly you were doing
-      when you view it later.</p>
-  </div>
+  <p>Welcome! This application is a time management system targeted towards the
+    student. Of course, anybody can use and benefit from this application, and
+    I encourage you to do so. This help page has 4 sections, each relating to
+    the 4 different &quot;commands&quot; one can perform whilst using this app.
+    To find out more about this application and its creator, check out the
+    <i>About</i> section.</p>
 
-  <div id="stop">
-    <h2>Stop</h2>
-    <p>The stop command is the command that you use when you wish to stop your
-      study/work session. Like the start command, it takes an optional message
-      that can be used to add a note, describe what you were doing, what you
-      finished doing, what you hope to pick up next time, or something similar.
-    </p>
-  </div>
+  <h2 id="view">View</h2>
+  <p>The view command is the most complex of all of the commands in this
+    application. It allows you to view your previous log entries in a multitude
+    of different ways with a timeframe filter and additional view options.</p>
 
-  <div id="undo">
-    <h2>Undo</h2>
-    <p>The undo command is the command that undoes the previous start or stop
-      command.</p>
-    <p>You would use this command if you accidentally pressed start or stop, if
-      you weren&apos;t actually using your time productively since you pressed
-      start, or other reasons that you wish to undo the last start/stop command.
-    </p>
-    <p><strong class="warning">WARNING:</strong> The undo command is a double
-      edged sword: it is the gracious savior of this application, but can be the
-      cursed devil if used carelessly. Make sure you use this with care.</p>
-  </div>
+  <h3 id="timeframe">Timeframe</h3>
+  <p>With the timeframe selection, you can select the timeframe (in days) that
+    you wish to view data for. It is inclusive on both ends, so if you chose
+    &quot;from 5 days ago to 3 days ago&quot; and today&apos;s date is Jan.
+    10th, you will see reports for the 5th, 6th, and 7th of January. If one or
+    both of the timeframe range endpoints is not specified, it automatically
+    calculates the correct timeframe for you. For example, if you don&apos;t
+    enter a value into the &quot;from _ days ago&quot; input, it will report
+    from the first date that you logged a start time. If you don&apos;t enter
+    a value into the &quot;up to _ days ago&quot; input, the timeframe will
+    automatically use 0 as that value, reporting all the way up to (and
+    including) the current day.</p>
+
+  <h3 id="view-options">View Options</h3>
+  <p>These are the 5 view options that all report your data/logging history in
+    nice, clean, easy-to-understand ways.</p>
+
+  <h4 id="default">Default</h4>
+  <p>The most general option, <i>Default</i> reports your data just as you
+    entered it&mdash;a start time, a stop time, and a message, along with time
+    elapsed in that session. All sessions are reported, along with all start/
+    stop messages and session time totals. Along with all of that, there is a
+    handy average time elapsed per day and a total elapsed time report.</p>
+  <p>This view option is the best suited for smaller timeframes where you wish
+    to see all the info of each session without all the extra day-delimiting
+    reports found in <i>Day Delimited</i>.</p>
+
+  <h4 id="daily-digest">Daily Digest</h4>
+  <p>This view option shows only the total time studied per day. There are no
+    session times (or even start/stop messages) reported. Just the pure, raw,
+    daily time for quicker, more efficient viewing</p>
+  <p>If there were 16 sessions spread throughout 5 days, <i>Daily Digest</i>
+    would only report the total times for each of the 5 days, condensing all
+    sessions of that day into one daily time.</p>
+
+  <h4 id="day-delimited">Day Delimited</h4>
+  <p>This option is very similar to <i>Default</i>, with the addition of a
+    daily summary reported at the end of each days&apos; sessions, effectively
+    delimiting each day with a little summary.</p>
+  <p>This is if you want to see the individual sessions (with the start/stop
+    messages) as well as how much time you logged for that day.</p>
+
+  <h4 id="weekly-digest">Weekly Digest</h4>
+  <p><i>Weekly Digest</i> is similar to <i>Daily Digest</i> with one key
+    distinction. Instead of reporting condensed time summaries per day,
+    <i>Weekly Digest</i> reports for every whole week (7 days) of logged time.
+    As such, this command is really only useful if you have been steadily using
+    the application for several weeks.</p>
+  <p>This view option reports a weekly average at the end, specifying the
+    average hours studied per week.</p>
+
+  <h4 id="week-delimited">Week Delimited</h4>
+  <p>A combination of daily summaries and week delimitations, this view option
+    is one of the most helpful. Like <i>Daily Digest</i>, it only reports total
+    time per day instead of per individual session, drastically reducing the
+    visual bloat and allowing you to clearly and precisely see exactly what you
+    want. However, unlike <i>Daily Digest</i>, this option reports a weekly
+    summary that delimits every 7 days reported with total week study time.</p>
+  <p>Like <i>Weekly Digest</i>, this view option also reports a weekly average
+    at the end, right before the total time report.</p>
+
+  <h2 id="start">Start</h2>
+  <p>The start command is the command that you use when you wish to start your
+    study/work session. It takes an optional message to be attatched to that
+    specific log entry (see <a href="/about"><i>About</i></a> for more info)
+    that can be used to add a note to let you know what exactly you were doing
+    when you view it later.</p>
+
+  <h2 id="stop">Stop</h2>
+  <p>The stop command is the command that you use when you wish to stop your
+    study/work session. Like the start command, it takes an optional message
+    that can be used to add a note, describe what you were doing, what you
+    finished doing, what you hope to pick up next time, or something similar.
+  </p>
+
+  <h2 id="undo">Undo</h2>
+  <p>The undo command is the command that undoes the previous start or stop
+    command.</p>
+  <p>You would use this command if you accidentally pressed start or stop, if
+    you weren&apos;t actually using your time productively since you pressed
+    start, or other reasons that you wish to undo the last start/stop command.
+  </p>
+  <p class="clear-bottom"><strong class="warning">WARNING:</strong> The undo command is a double
+    edged sword: it is the gracious savior of this application, but can be the
+    cursed devil if used carelessly. Make sure you use this with care.</p>
 </div>
