@@ -1,7 +1,10 @@
+ /* General and element-wide selectors */
+
 * {
     box-sizing: border-box;
 }
 
+/* Probably best to keep disabled for those with motion sickness */
 /* * { */
 /*     scroll-behavior: smooth; */
 /* } */
@@ -14,7 +17,7 @@ body {
 }
 
 body * {
-    font-family: sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 header,
@@ -38,7 +41,7 @@ main > * {
 
 header,
 footer {
-    background-color: #00f5;
+    background-color: rgba(0,0,255,0.33);
     height: 10vh;
 }
 
@@ -49,6 +52,8 @@ header {
 footer {
     bottom: 0px;
 }
+
+/* Link (anchor) styling */
 
 span > a,
 a {
@@ -64,8 +69,8 @@ p > a {
     background-image: linear-gradient(
 	transparent 0%,
 	transparent calc(50% - 8px),
-	#00f5 calc(50% - 8px),
-	#00f5 100%
+	rgba(0,0,255,0.33) calc(50% - 8px),
+	rgba(0,0,255,0.33) 100%
     );
     transition-property: background-position;
     background-size: 100% 265%;
@@ -77,22 +82,37 @@ p > a:hover {
     background-position: 0% 100%;
 }
 
+/*~~ Link styling END ~~*/
+
+/* Scrollbar */
+
 main::-webkit-scrollbar {
     width: 15px;
 }
 
 main::-webkit-scrollbar-track {
-    background-color: #00f5;
+    background-color: rgba(0,0,255,0.33);
 }
 
 main::-webkit-scrollbar-thumb {
-    background-color: #00f6;
+    background-color: rgba(0,0,255,0.4);
     border-radius: 15px;
 }
 
 main::-webkit-scrollbar-thumb:hover {
-    box-shadow: inset 0px 0px 8px 2px #22f;
+    box-shadow: inset 0px 0px 8px 2px rgb(34,34,255);
 }
+
+/*~~ Scrollbar END ~~*/
+
+:target {
+    border-left: 5px solid rgba(0,0,255,0.33);
+    padding-left: 5px;
+}
+
+/*~~ General/element selectors END ~~*/
+
+/* Flash messages */
 
 .flash {
     padding-top: 0.5em;
@@ -104,16 +124,20 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 .danger {
-    background-color: #f005;
+    background-color: rgba(255,0,0.33);
 }
 
 .neutral {
-    background-color: #ff05;
+    background-color: rgba(255,255,0,0.33);
 }
 
 .success {
-    background-color: #0f05;
+    background-color: rgba(0,255,0,0.33);
 }
+
+/*~~ Flash messages END ~~*/
+
+/* Flexbox */
 
 .flex {
     display: flex;
@@ -136,6 +160,8 @@ main::-webkit-scrollbar-thumb:hover {
     justify-content: space-between;
 }
 
+/*~~ Flexbox END ~~*/
+
 .center-vertical {
     margin-top: auto;
     margin-bottom: auto;
@@ -147,7 +173,7 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 .name {
-    color: #e31b6d;
+    color: rgb(227,27,109);
     font-size: inherit;
     font-family: inherit;
 }
@@ -161,12 +187,14 @@ main::-webkit-scrollbar-thumb:hover {
     align-self: center;
     text-decoration: none;
     font-size: 1.25em;
-    color: black;
+    color: rgb(0,0,0);
     padding: 0.5em 2em;
+    font-weight: 300;
 }
 
 .nav-link:hover {
     color: grey;
+    color: rgb(128,128,128)
 }
 
 .center-child {
@@ -176,16 +204,16 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 h2 {
-    font-family: monospace, sans-serif;
+    font-family: monospace, Montserrat, sans-serif;
     font-size: 2em;
 }
 
 h3 {
-    font-family: cursive, sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 h4 {
-    font-family: "Courier New", courier, consolas, monospace, sans-serif;
+    font-family: "Courier New", courier, consolas, monospace, Montserrat, sans-serif;
     font-size: 1.15em;
 }
 
@@ -197,10 +225,10 @@ h4 {
 .button,
 .input,
 .toc {
-    font-family: cursive, sans-serif;
+    font-family: /* cursive, */Montserrat, sans-serif;
     padding: 10px;
-    background-color: #eee;
-    border: solid black 1px;
+    background-color: rgb(238,238,238);
+    border: solid rgb(0,0,0) 1px;
     border-radius: 5px;
 }
 
@@ -248,7 +276,7 @@ h4 {
     margin-top: 0px;
     font-size: 30px;
     font-family: monospace;
-    color: grey;
+    color: rgb(128,128,128);
 }
 
 .toc-list {
@@ -267,21 +295,21 @@ h4 {
 .toc-subanchor,
 .toc-subsubanchor{
     text-decoration: none;
-    font-family: cursive;
+    /* font-family: cursive; */
 }
 
 .toc-anchor {
-    color: #700;
+    color: rgb(119,0,0);
     font-size: 20px;
 }
 
 .toc-subanchor {
-    color: #007;
+    color: rgb(0,0,119);
     font-size: 18px;
 }
 
 .toc-subsubanchor {
-    color: #070;
+    color: rgb(0,119,0);
     font-size: 15px;
 }
 
@@ -292,7 +320,7 @@ h4 {
 }
 
 .warning {
-    color: #f00;
+    color: rgb(255,0,0);
 }
 
 #view {
@@ -313,37 +341,37 @@ h4 {
 }
 
 /* .title { */
-/*     font-family: consolas, monospace, sans-serif; */
+/*     font-family: consolas, monospace, Montserrat, sans-serif; */
 /* } */
 
 .start > .title,
 .stop > .title {
-    color: #805780;
+    color: rgb(128,87,128);
 }
 
 .session-time > .title {
-    color: #008064;
+    color: rgb(0,128,100);
 }
 
 /* .time, */
 /* .message { */
-/*     font-family: consolas, monospace, sans-serif; */
+/*     font-family: consolas, monospace, Montserrat, sans-serif; */
 /* } */
 
 .time {
-    color: #0f0;
+    color: rgb(0,255,0);
 }
 
 .message {
-    color: #ff6400;
+    color: rgb(255,100,0);
 }
 
 .session-time > .content {
-    color: #ff0;
+    color: rgb(255,255,0);
 }
 
 .session * {
-    font-family: consolas, monospace, sans-serif;
+    font-family: consolas, monospace, Montserrat, sans-serif;
 }
 
 .session {
@@ -354,9 +382,9 @@ h4 {
     padding: 5px;
     margin: 10px;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px 5px #463232;
+    box-shadow: 0px 0px 5px 5px rgb(70,50,50);
     width: 60%;
-    background-color: #463232;
+    background-color: rgb(70,50,50);
     overflow: auto;
 }
 
@@ -365,19 +393,19 @@ h4 {
 }
 
 #view-content::-webkit-scrollbar-thumb {
-    background-color: #231616;
+    background-color: rgb(35,22,22);
     border-radius: 10px;
 }
 
 #view-content::-webkit-scrollbar-thumb:hover {
-    box-shadow: inset 0px 0px 10px 1px #231616;
-    background-color: #463232;
+    box-shadow: inset 0px 0px 10px 1px rgb(35,22,22);
+    background-color: rgb(70,50,50);
 }
 
 #view-content::-webkit-scrollbar-track {
-    background-color: #694848;
+    background-color: rgb(105,72,72);
     border-radius: 10px;
-    box-shadow: inset 0px 0px 10px 2px #463232;
+    box-shadow: inset 0px 0px 10px 2px rgb(70,50,50);
 }
 
 
@@ -386,28 +414,32 @@ h4 {
     top: 35%;
     text-align: center;
     font-size: 3em;
-    color: #e31b6d;
+    color: rgb(227,27,109);
 }
 
 #profile-pic {
     display: inline-block;
     padding: 30px 30px 10px 30px;
-    background-color: #00f5;
+    background-color: rgba(0,0,255,0.33);
     border-radius: 5px;
-    box-shadow: 0px 0px 5px 5px #00f5;
+    box-shadow: 0px 0px 5px 5px rgb(0,0,255,0.33);
 }
 
 #profile-pic > figcaption {
-    font-family: consolas, monospace, cursive, sans-serif;
+    font-family: consolas, monospace, /* cursive, */Montserrat, sans-serify;
     text-align: center;
     font-size: 20px;
 }
 
 #profile-pic > img {
-    border: solid 1px black;
+    border: solid 1px rgb(0,0,0);
     border-radius: 5px;
 }
 
-#disclaimer {
+.clear-bottom {
     margin-bottom: 5vh;
+}
+
+#disclaimer {
+    font-weight: 300;
 }
