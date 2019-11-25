@@ -86,6 +86,7 @@ p > a:hover {
 
 /* Scrollbar */
 
+/* Chrome */
 main::-webkit-scrollbar {
     width: 15px;
 }
@@ -101,6 +102,11 @@ main::-webkit-scrollbar-thumb {
 
 main::-webkit-scrollbar-thumb:hover {
     box-shadow: inset 0px 0px 8px 2px rgb(34,34,255);
+}
+
+/* Firefox */
+main {
+    scrollbar-color: rgba(0,0,255,0.33) rgba(0,0,255,0.4);
 }
 
 /*~~ Scrollbar END ~~*/
@@ -124,7 +130,7 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 .danger {
-    background-color: rgba(255,0,0.33);
+    background-color: rgba(255,0,0,0.33);
 }
 
 .neutral {
@@ -388,6 +394,7 @@ h4 {
     overflow: auto;
 }
 
+/* Chrome */
 #view-content::-webkit-scrollbar {
     width: 10px;
 }
@@ -408,6 +415,11 @@ h4 {
     box-shadow: inset 0px 0px 10px 2px rgb(70,50,50);
 }
 
+/* Firefox */
+#view-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(35,22,22) rgb(105,72,72);
+}
 
 #shrug {
     position: relative;

@@ -218,3 +218,8 @@ post '/undo' do
     erb :actions
   end
 end
+
+not_found do
+  flash("That page doesn't exist", :danger)
+  redirect '/'
+end
