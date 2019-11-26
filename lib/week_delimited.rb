@@ -9,13 +9,8 @@ module WeekDelimited
   include Timeable
 
   def week_delimited(from, to)
-    weeks_days = weeks(from, to).map do |sessions|
-      sessions.chunk { |session| session.start.time.day }.map(&:last)
-    end
-    weeks_days_seconds = weeks_days.map do |days|
-      days.map { |sessions| sessions.sum(&:seconds) }
-    end
-    weeks_seconds = weeks_days_seconds.map { |days| days.sum }
+    weeks_days, weeks_days_seconds, weeks_seconds = week_data(from, to)
+    all_zipped = weeks_days.zip(weeks_days_seconds, weeks_seconds)
 
     tot_sec = weeks_days_seconds.sum(&:sum)
     avg_sec = begin tot_sec / weeks_days.size
@@ -24,8 +19,22 @@ module WeekDelimited
 
     timeframe_html(from, to) +
       choice_html('WEEK DELIMITED') +
-      week_delimited_content(weeks_days, weeks_days_seconds, weeks_seconds) +
+      week_delimited_content(all_zipped) +
       summaries_html(avg_sec, tot_sec, 'per logged week')
+  end
+
+  def week_data(from, to)
+    weeks_days = weeks(from, to).map do |sessions|
+      sessions.chunk { |session| session.start.time.day }.map(&:last)
+    end
+
+    weeks_days_seconds = weeks_days.map do |days|
+      days.map { |sessions| sessions.sum(&:seconds) }
+    end
+
+    weeks_seconds = weeks_days_seconds.map(&:sum)
+
+    [weeks_days, weeks_days_seconds, weeks_seconds]
   end
 
   def week_delimiter(seconds)
@@ -41,8 +50,8 @@ module WeekDelimited
     HTML
   end
 
-  def week_delimited_content(weeks_days, weeks_days_seconds, weeks_seconds)
-    weeks_days.zip(weeks_days_seconds, weeks_seconds).map do |days, days_seconds, weekly_seconds|
+  def week_delimited_content(all_zipped)
+    all_zipped.map do |days, days_seconds, weekly_seconds|
       days.zip(days_seconds).map do |sessions, daily_seconds|
         <<~HTML
           <div class="summary">
