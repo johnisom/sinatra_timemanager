@@ -27,8 +27,9 @@ module Viewable
   SEC_IN_DAY = 24 * 60 * 60
 
   def view(timeframe_from, timeframe_to, view_option)
-    from, to = convert_timeframes(timeframe_from, timeframe_to)
     raise NoViewDataError, "Can't view without any data!" if @sessions.empty?
+
+    from, to = convert_timeframes(timeframe_from, timeframe_to)
     if (error = error_for_timeframes(from, to))
       raise InvalidFiltersError, error
     end
