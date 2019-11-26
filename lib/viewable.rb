@@ -69,6 +69,12 @@ module Viewable
     (Time.now.to_date - @sessions.first.start.time.to_date).to_i
   end
 
+  def weeks(from, to)
+    sessions_in_timeframe(from, to).chunk do |session|
+      session.start.time.to_date.cweek
+    end.map(&:last)
+  end
+
   def days(from, to)
     sessions_in_timeframe(from, to).chunk do |session|
       session.start.time.day

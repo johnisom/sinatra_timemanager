@@ -15,4 +15,12 @@ module Timeable
     hour, min, sec = hour_min_sec(seconds)
     format('%<hour>02d:%<min>02d:%<sec>02d', hour: hour, min: min, sec: sec)
   end
+
+  def strfdate(date)
+    date.strftime('%a %Y-%m-%d')
+  end
+
+  def strftime(time)
+    time.strftime('%a %Y-%m-%d')
+  end
 end

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'timeable'
+
 # Entry class with (optional) message and time
 class Entry
+  include Timeable
+
   attr_reader :message, :time
 
   def initialize(message)
@@ -10,7 +14,7 @@ class Entry
   end
 
   def to_s
-    "#{time.strftime('%a %Y-%m-%d %H:%M:%S')} -> #{message}"
+    "#{strftime(time)} -> #{message}"
   end
 
   def to_html
@@ -21,7 +25,7 @@ class Entry
   private
 
   def time_str
-    time.strftime('%a %Y-%m-%d %H:%M:%S')
+    strftime(time)
   end
 
   def message_str

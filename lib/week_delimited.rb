@@ -4,5 +4,5 @@
 module WeekDelimited
   private
 
-  def week_delimited(timeframe_from, timeframe_to); end
+  def week_delimited(from, to); end
 end
