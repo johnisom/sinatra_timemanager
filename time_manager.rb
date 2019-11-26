@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require 'sinatra'
@@ -38,21 +37,30 @@ def error_for_signin(username, password)
   if !taken?(username)
     "Sorry, we couldn't find a username matching #{username}."
   elsif !valid_credentials?(username, password)
-    "Credentials are invalid. Try again."
+    'Credentials are invalid. Try again.'
   end
 end
 
 def error_for_signup(username, password)
+  error_for_username(username) || error_for_password(password)
+end
+
+def error_for_username(username)
   if !(2..16).cover? username.size
     'Username must be between 2 and 16 characters long.'
-  elsif !(8..16).cover? password.size
-    'Password must be between 8 and 16 characters long.'
   elsif username =~ /\W/
     'Username must only contain alphanumeric characters (0-9, A-z, _).'
-  elsif !(password =~ /\d/ && password =~ /[\W\S]/ && password =~ /[a-z]/i)
-    'Password must contain at least 1 number, 1 special character, and 1 letter.'
   elsif taken?(username)
     "Sorry, #{username} is already taken."
+  end
+end
+
+def error_for_password(password)
+  if !(8..16).cover? password.size
+    'Password must be between 8 and 16 characters long.'
+  elsif !(password =~ /\d/ && password =~ /[\W\S]/ && password =~ /[a-z]/i)
+    'Password must contain at least 1 number,'\
+    ' 1 special character, and 1 letter.'
   end
 end
 
@@ -63,17 +71,17 @@ def create_user(username, password)
 end
 
 def check_unauthorization
-  if session[:username]
-    flash('You must be signed out to do that.', :danger)
-    redirect '/'
-  end
+  return unless session[:username]
+
+  flash('You must be signed out to do that.', :danger)
+  redirect '/'
 end
 
 def check_authorization
-  unless session[:username]
-    flash('You must be signed in to do that.', :danger)
-    redirect '/'
-  end
+  return if session[:username]
+
+  flash('You must be signed in to do that.', :danger)
+  redirect '/'
 end
 
 get '/' do
@@ -90,7 +98,7 @@ end
 
 get '/about' do
   erb :about
-  end
+end
 
 get '/view' do
   check_authorization
@@ -150,7 +158,7 @@ post '/sign-in' do
     flash(error, :danger)
     erb :sign_in
   else
-    flash("You were successfully signed in.", :success)
+    flash('You were successfully signed in.', :success)
     session[:username] = username
     session[:time_manager] = TM.new(username)
     redirect '/'
@@ -178,45 +186,39 @@ end
 post '/sign-out' do
   check_authorization
 
-  flash("You were successfully signed out.", :success)
+  flash('You were successfully signed out.', :success)
   session.delete(:username)
   session.delete(:time_manager)
   redirect '/'
 end
 
 post '/start' do
-  begin
-    message = params[:message] unless params[:message].empty?
-    session[:time_manager].start(message: message)
-    flash('Time started.')
-    redirect '/actions'
-  rescue StartTwiceError => e
-    flash(e.message, :danger)
-    erb :actions
-  end
+  message = params[:message] unless params[:message].empty?
+  session[:time_manager].start(message: message)
+  flash('Time started.')
+  redirect '/actions'
+rescue StartTwiceError => e
+  flash(e.message, :danger)
+  erb :actions
 end
 
 post '/stop' do
-  begin
-    message = params[:message] unless params[:message].empty?
-    session[:time_manager].stop(message: message)
-    flash('Time stopped.')
-    redirect '/actions'
-  rescue StopTwiceError => e
-    flash(e.message, :danger)
-    erb :actions
-  end
+  message = params[:message] unless params[:message].empty?
+  session[:time_manager].stop(message: message)
+  flash('Time stopped.')
+  redirect '/actions'
+rescue StopTwiceError => e
+  flash(e.message, :danger)
+  erb :actions
 end
 
 post '/undo' do
-  begin
-    session[:time_manager].undo
-    flash('Last entry undone.')
-    redirect '/actions'
-  rescue MaxUndoError => e
-    flash(e.message, :danger)
-    erb :actions
-  end
+  session[:time_manager].undo
+  flash('Last entry undone.')
+  redirect '/actions'
+rescue MaxUndoError => e
+  flash(e.message, :danger)
+  erb :actions
 end
 
 not_found do

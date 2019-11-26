@@ -23,17 +23,19 @@ class TM
   DATA_PATH = File.expand_path('./data')
 
   attr_reader :sessions
-  
+
   def initialize(name)
     @username = name.gsub(/\W/, '')
     touchfile(@username)
     @sessions = Psych.load_file(File.join(DATA_PATH, "#{@username}.yml"))
     @sessions = [] unless @sessions.instance_of?(Array)
   end
-  
+
   def start(message: nil)
-    raise StartTwiceError, "Can't start twice in a row!" if !last_session.complete?
-    
+    unless last_session.complete?
+      raise StartTwiceError, "Can't start twice in a row!"
+    end
+
     @sessions << Session.new(start: Entry.new(message))
 
     update_file
@@ -48,7 +50,7 @@ class TM
 
   def undo
     raise MaxUndoError, "Can't undo any more!" if @sessions.empty?
-      
+
     if last_session.complete?
       last_session.stop = nil
     else

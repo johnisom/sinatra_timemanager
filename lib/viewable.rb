@@ -23,30 +23,31 @@ module Viewable
   include WeeklyDigest
   include WeekDelimited
   include Timeable
-  
+
   SEC_IN_DAY = 24 * 60 * 60
 
   def view(timeframe_from, timeframe_to, view_option)
+    from, to = convert_timeframes(timeframe_from, timeframe_to)
     raise NoViewDataError, "Can't view without any data!" if @sessions.empty?
-
-    timeframe_from, timeframe_to = convert_timeframes(timeframe_from,
-                                                      timeframe_to)
-
-    if (error = error_for_timeframes(timeframe_from, timeframe_to))
+    if (error = error_for_timeframes(from, to))
       raise InvalidFiltersError, error
     end
 
-    case view_option
-    when 'default', nil   then        default(timeframe_from, timeframe_to)
-    when 'daily-digest'   then   daily_digest(timeframe_from, timeframe_to)
-    when 'day-delimited'  then  day_delimited(timeframe_from, timeframe_to)
-    when 'weekly-digest'  then  weekly_digest(timeframe_from, timeframe_to)
-    when 'week-delimited' then week_delimited(timeframe_from, timeframe_to)
-    else raise InvalidFiltersError, "View option not valid."
-    end
+    do_view_option(from, to, view_option)
   end
 
   private
+
+  def do_view_option(from, to, option)
+    case option
+    when 'default', nil then default(from, to)
+    when 'daily-digest' then daily_digest(from, to)
+    when 'day-delimited' then day_delimited(from, to)
+    when 'weekly-digest' then weekly_digest(from, to)
+    when 'week-delimited' then week_delimited(from, to)
+    else raise InvalidFiltersError, 'View option not valid.'
+    end
+  end
 
   def convert_timeframes(timeframe_from, timeframe_to)
     timeframe_to = timeframe_to.to_i
@@ -60,13 +61,17 @@ module Viewable
   end
 
   def error_for_timeframes(timeframe_from, timeframe_to)
-    if timeframe_from < timeframe_to
-      'Invalid timeframe range.'
-    end
+    'Invalid timeframe range.' unless timeframe_from < timeframe_to
   end
 
   def max_timeframe
     (Time.now.to_date - @sessions.first.start.time.to_date).to_i
+  end
+
+  def days(from, to)
+    sessions_in_timeframe(from, to).chunk do |session|
+      session.start.time.day
+    end.map(&:last)
   end
 
   def sessions_in_timeframe(from, to)
@@ -78,7 +83,7 @@ module Viewable
   end
 
   def timeframe_html(from, to)
-    days = lambda { |n| n != 1 ? 'days' : 'day' }
+    days = ->(n) { n != 1 ? 'days' : 'day' }
     <<~HTML
       <div class="preamble">
         <span>Showing results from </span>

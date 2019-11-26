@@ -5,22 +5,15 @@ module DailyDigest
   private
 
   def daily_digest(from, to)
-    days = sessions_in_timeframe(from, to).chunk do |session|
-      session.start.time.day
-    end.map(&:last)
-
-    day_seconds = days.map do |sessions|
-      sessions.sum(&:seconds)
-    end
-
-    content = daily_digest_content(days, day_seconds)
+    days = days(from, to)
+    day_seconds = days.map { |sessions| sessions.sum(&:seconds) }
 
     tot_sec = day_seconds.sum
     avg_sec = tot_sec / (from - to + 1)
 
     timeframe_html(from, to) +
       choice_html('DAILY DIGEST') +
-      content +
+      daily_digest_content(days, day_seconds) +
       summaries_html(avg_sec, tot_sec)
   end
 
