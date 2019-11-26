@@ -111,7 +111,7 @@ module Viewable
     HTML
   end
 
-  def summaries_html(avg_sec, tot_sec, avg_timeframe = 'per day')
+  def summaries_html(avg_sec, tot_sec, avg_timeframe)
     <<~HTML
       <br>
       <div class="summary">

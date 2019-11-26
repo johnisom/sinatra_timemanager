@@ -9,12 +9,14 @@ module DayDelimited
     day_seconds = days.map { |sessions| sessions.sum(&:seconds) }
 
     tot_sec = day_seconds.sum
-    avg_sec = tot_sec / (from - to + 1)
+    avg_sec = begin tot_sec / days.size
+              rescue ZeroDivisionError; 0
+              end
 
     timeframe_html(from, to) +
       choice_html('DAY DELIMITED') +
       day_delimited_content(days, day_seconds) +
-      summaries_html(avg_sec, tot_sec)
+      summaries_html(avg_sec, tot_sec, 'per logged day')
   end
 
   def day_delimiter(seconds)

@@ -16,6 +16,6 @@ module Default
     timeframe_html(from, to) +
       choice_html('DEFAULT') +
       content +
-      summaries_html(avg_sec, tot_sec)
+      summaries_html(avg_sec, tot_sec, 'per day within timeframe')
   end
 end

@@ -11,21 +11,26 @@ module DailyDigest
   def daily_digest(from, to)
     days = days(from, to)
     day_seconds = days.map { |sessions| sessions.sum(&:seconds) }
-    day_dates = days.map do |sessions|
-      sessions[0].start.time.to_date
-    end
 
     tot_sec = day_seconds.sum
-    avg_sec = tot_sec / (from - to + 1)
+    avg_sec = begin tot_sec / days.size
+              rescue ZeroDivisionError; 0
+              end
 
     timeframe_html(from, to) +
       choice_html('DAILY DIGEST') +
-      daily_digest_content(day_dates, day_seconds) +
-      summaries_html(avg_sec, tot_sec)
+      daily_digest_content(day_dates(days), day_seconds) +
+      summaries_html(avg_sec, tot_sec, 'per logged day')
   end
 
-  def daily_digest_content(day_dates, day_seconds)
-    day_dates.zip(day_seconds).map do |date, seconds|
+  def day_dates(days)
+    days.map do |sessions|
+      sessions[0].start.time.to_date
+    end
+  end
+
+  def daily_digest_content(dates, day_seconds)
+    dates.zip(day_seconds).map do |date, seconds|
       <<~HTML
         <div class="summary">
           <span class="title">#{strfdate(date)}: </span>
