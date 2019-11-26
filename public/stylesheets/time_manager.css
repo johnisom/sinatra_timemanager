@@ -334,7 +334,7 @@ h4 {
 }
 
 #view-form {
-    width: 30%;
+    width: 35%;
 }
 
 .timeframe {
@@ -364,7 +364,7 @@ h4 {
 /*     font-family: consolas, monospace, Montserrat, sans-serif; */
 /* } */
 
-.timeframe,
+.timeframe-display,
 .time {
     color: rgb(0,255,0);
 }
@@ -404,7 +404,7 @@ h4 {
     margin: 10px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px 5px rgb(70,50,50);
-    width: 60%;
+    width: 55%;
     background-color: rgb(70,50,50);
     overflow: auto;
 }

@@ -4,16 +4,16 @@
 module Default
   private
 
-  def default(timeframe_from, timeframe_to)
-    sessions = sessions_in_timeframe(timeframe_from, timeframe_to)
+  def default(from, to)
+    sessions = sessions_in_timeframe(from, to)
     content = sessions.map do |session|
       %(<div class="session">#{session.to_html}</div>)
     end.join
 
     tot_sec = sessions.sum(&:seconds)
-    avg_sec = tot_sec / (timeframe_from - timeframe_to + 1)
+    avg_sec = tot_sec / (from - to + 1)
 
-    timeframe_html(timeframe_from, timeframe_to) +
+    timeframe_html(from, to) +
       choice_html('DEFAULT') +
       content +
       summaries_html(avg_sec, tot_sec)

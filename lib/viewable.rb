@@ -82,15 +82,14 @@ module Viewable
     <<~HTML
       <div class="preamble">
         <span>Showing results from </span>
-        <span class="timeframe">#{from}</span>
+        <span class="timeframe-display">#{from}</span>
         <span>#{days.call(from)} ago to </span>
-        <span class="timeframe">#{to}</span>
+        <span class="timeframe-display">#{to}</span>
         <span>#{days.call(to)} ago</span>
       </div>
     HTML
   end
 
-  # TODO: this
   def choice_html(display_name)
     <<~HTML
       <div class="preamble">
@@ -102,6 +101,7 @@ module Viewable
 
   def summaries_html(avg_sec, tot_sec, avg_timeframe = 'per day')
     <<~HTML
+      <br>
       <div class="summary">
         <span class="title">Average: </span>
         <span class="content">#{time_elapsed(avg_sec)}</span>
