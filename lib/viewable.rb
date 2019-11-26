@@ -61,7 +61,7 @@ module Viewable
   end
 
   def error_for_timeframes(timeframe_from, timeframe_to)
-    'Invalid timeframe range.' unless timeframe_from < timeframe_to
+    'Invalid timeframe range.' if timeframe_from < timeframe_to
   end
 
   def max_timeframe

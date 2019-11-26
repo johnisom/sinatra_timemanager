@@ -391,6 +391,19 @@ h4 {
     color: rgb(255,0,0);
 }
 
+.delimiter {
+    margin: 1em 0px;
+}
+
+.delimiter > .line {
+    color: rgb(255,0,255);
+    overflow: hidden;
+}
+
+.delimiter > .summary {
+    margin: 1em 0px;
+}
+
 #view-content * {
     font-family: consolas, monospace, Montserrat, sans-serif;
 }
