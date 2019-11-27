@@ -18,12 +18,7 @@ class TimeManagerTest < Minitest::Test
     Sinatra::Application
   end
 
-  def test_index
-    get '/'
-
-    assert_equal 200, last_response.status
-    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
-
+  def assert_index_body last_response
     assert_includes last_response.body, '<h1>Welcome to Time Manager!</h1>'
     assert_includes last_response.body, '<h2>New here?</h2>'
     assert_includes last_response.body, '<h2>Already a user?</h2>'
@@ -32,6 +27,14 @@ class TimeManagerTest < Minitest::Test
     assert_includes last_response.body, '<a class="nav-link" href="/help">'
     assert_includes last_response.body, '<a class="nav-link" href="/about">'
     assert_includes last_response.body, '<a class="nav-link" href="/sign-in">'
+  end
+
+  def test_index
+    get '/'
+
+    assert_equal 200, last_response.status
+    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+    assert_index_body last_response
   end
 
   def test_home
@@ -46,6 +49,6 @@ class TimeManagerTest < Minitest::Test
     assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
 
     # Make sure it redirects to index
-    assert_includes last_response.body, '<h1>Welcome to Time Manager!</h1>'
+    assert_index_body last_response
   end
 end
