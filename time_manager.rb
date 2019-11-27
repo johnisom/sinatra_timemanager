@@ -104,7 +104,7 @@ get '/view' do
   check_authorization
 
   begin
-    @content = session[:time_manager].view(params[:timeframe_from],
+    @content = TM.new(session[:username]).view(params[:timeframe_from],
                                            params[:timeframe_to],
                                            params[:view_option])
     erb :view
@@ -160,7 +160,6 @@ post '/sign-in' do
   else
     flash('You were successfully signed in.', :success)
     session[:username] = username
-    session[:time_manager] = TM.new(username)
     redirect '/'
   end
 end
@@ -178,7 +177,6 @@ post '/sign-up' do
     create_user(username, password)
     flash("Welcome aboard, #{username}!", :success)
     session[:username] = username
-    session[:time_manager] = TM.new(username)
     redirect '/'
   end
 end
@@ -194,7 +192,7 @@ end
 
 post '/start' do
   message = params[:message] unless params[:message].empty?
-  session[:time_manager].start(message: message)
+  TM.new(session[:username]).start(message: message)
   flash('Time started.')
   redirect '/actions'
 rescue StartTwiceError => e
@@ -204,7 +202,7 @@ end
 
 post '/stop' do
   message = params[:message] unless params[:message].empty?
-  session[:time_manager].stop(message: message)
+  TM.new(session[:username]).stop(message: message)
   flash('Time stopped.')
   redirect '/actions'
 rescue StopTwiceError => e
@@ -213,7 +211,7 @@ rescue StopTwiceError => e
 end
 
 post '/undo' do
-  session[:time_manager].undo
+  TM.new(session[:username]).undo
   flash('Last entry undone.')
   redirect '/actions'
 rescue MaxUndoError => e

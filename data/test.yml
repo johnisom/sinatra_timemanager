@@ -1,6 +1,202 @@
 ---
 - !ruby/object:Session
   start: !ruby/object:Entry
+    time: 2019-11-01 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-01 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-01 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-01 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-02 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-02 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-02 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-02 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-03 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-03 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-03 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-03 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-04 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-04 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-04 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-04 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-05 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-05 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-05 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-05 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-06 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-06 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-06 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-06 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-07 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-07 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-07 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-07 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-08 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-08 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-08 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-08 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-09 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-09 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-09 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-09 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-10 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-10 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-10 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-10 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-11 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-11 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-11 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-11 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-12 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-12 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-12 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-12 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-13 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-13 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-13 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-13 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-14 08:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-14 12:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-14 14:00:00.000000000 -07:00
+    message: 
+  stop: !ruby/object:Entry
+    time: 2019-11-14 18:00:00.000000000 -07:00
+    message: 
+- !ruby/object:Session
+  start: !ruby/object:Entry
     time: 2019-11-15 08:00:00.000000000 -07:00
     message: This is a start message
   stop: !ruby/object:Entry
@@ -47,11 +243,4 @@
     message: work on the-time-manager.herokuapp.com
   stop: !ruby/object:Entry
     time: 2019-11-21 18:00:00.000000000 -07:00
-    message: 
-- !ruby/object:Session
-  start: !ruby/object:Entry
-    time: 2019-11-22 08:00:00.000000000 -07:00
-    message: 
-  stop: !ruby/object:Entry
-    time: 2019-11-22 14:00:00.000000000 -07:00
     message: 
