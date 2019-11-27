@@ -11,11 +11,9 @@ require_relative 'signed_out_assertions'
 
 Minitest::Reporters.use!
 
-# Main test class for main application
-class SignedOutTest < Minitest::Test
+# Base test class for signed in and signed out tests
+class BaseTest < Minitest::Test
   include Rack::Test::Methods
-
-  include SignedOutAssertions
 
   def app
     Sinatra::Application
@@ -25,6 +23,11 @@ class SignedOutTest < Minitest::Test
     assert_equal 200, last_response.status
     assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
   end
+end
+
+# Signed out tests
+class SignedOutTest < BaseTest
+  include SignedOutAssertions
 
   def test_index
     get '/'
@@ -71,5 +74,13 @@ class SignedOutTest < Minitest::Test
     assert_status_and_content_type
     assert_header
     assert_main_sign_in
+  end
+
+  def test_sign_up
+    get '/sign-up'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up
   end
 end
