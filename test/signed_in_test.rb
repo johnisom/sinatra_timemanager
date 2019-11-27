@@ -30,4 +30,3 @@ class SignedInTest < BaseTest
     assert_main_about
   end
 end
-

@@ -17,4 +17,3 @@ class BaseTest < Minitest::Test
     assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
   end
 end
-

@@ -10,7 +10,7 @@ module SignedInAssertions
     assertions = []
 
     refutations = []
-    
+
     assert_and_refute(assertions, refutations)
   end
 
@@ -18,7 +18,7 @@ module SignedInAssertions
     assertions = []
 
     refutations = []
-    
+
     assert_and_refute(assertions, refutations)
   end
 
@@ -26,7 +26,7 @@ module SignedInAssertions
     assertions = []
 
     refutations = []
-    
+
     assert_and_refute(assertions, refutations)
   end
 end
