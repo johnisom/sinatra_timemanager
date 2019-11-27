@@ -11,9 +11,12 @@ require 'yaml'
 
 require_relative 'lib/tm'
 
+CREDS_PATH = File.expand_path('credentials', '.')
+
 configure do
   enable :sessions
   set :session_secret, development? ? 'secret' : SecureRandom.hex(100)
+  Dir.mkdir(CREDS_PATH) unless File.directory?(CREDS_PATH)
 end
 
 def flash(message, type = :neutral)
@@ -21,8 +24,8 @@ def flash(message, type = :neutral)
 end
 
 def credentials
-  FileUtils.touch('credentials.yml')
-  Psych.load_file('credentials.yml')
+  FileUtils.touch(File.join(CREDS_PATH, 'credentials.yml'))
+  Psych.load_file(File.join(CREDS_PATH, 'credentials.yml')) || {}
 end
 
 def valid_credentials?(username, password)
@@ -67,7 +70,7 @@ end
 def create_user(username, password)
   new_creds = credentials
   new_creds[username] = BCrypt::Password.create(password).to_s
-  File.write('credentials.yml', Psych.dump(new_creds))
+  File.write(File.join(CREDS_PATH, 'credentials.yml'), Psych.dump(new_creds))
 end
 
 def check_unauthorization
