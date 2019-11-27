@@ -105,8 +105,8 @@ get '/view' do
 
   begin
     @content = TM.new(session[:username]).view(params[:timeframe_from],
-                                           params[:timeframe_to],
-                                           params[:view_option])
+                                               params[:timeframe_to],
+                                               params[:view_option])
     erb :view
   rescue NoViewDataError => e
     flash(e.message, :danger)
