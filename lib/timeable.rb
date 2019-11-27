@@ -21,6 +21,6 @@ module Timeable
   end
 
   def strftime(time)
-    time.strftime('%a %Y-%m-%d')
+    time.strftime('%a %Y-%m-%d %H:%M:%S')
   end
 end

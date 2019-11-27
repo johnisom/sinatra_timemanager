@@ -6,3 +6,4 @@
 \#*#
 data/*.yml
 !data/test.yml
+.byebug_history
