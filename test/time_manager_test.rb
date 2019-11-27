@@ -21,11 +21,15 @@ class SignedOutTest < Minitest::Test
     Sinatra::Application
   end
 
+  def assert_status_and_content_type
+    assert_equal 200, last_response.status
+    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+  end
+
   def test_index
     get '/'
 
-    assert_equal 200, last_response.status
-    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+    assert_status_and_content_type
     assert_header
     assert_main_index
   end
@@ -38,8 +42,7 @@ class SignedOutTest < Minitest::Test
     # Redirect to index
     get last_response['Location']
 
-    assert_equal 200, last_response.status
-    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+    assert_status_and_content_type
 
     # Make sure it redirects to index
     assert_header
@@ -49,9 +52,24 @@ class SignedOutTest < Minitest::Test
   def test_help
     get '/help'
 
-    assert_equal 200, last_response.status
-    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+    assert_status_and_content_type
     assert_header
     assert_main_help
+  end
+
+  def test_about
+    get '/about'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_about
+  end
+
+  def test_sign_in
+    get '/sign-in'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_in
   end
 end
