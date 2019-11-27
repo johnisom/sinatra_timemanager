@@ -61,7 +61,7 @@ end
 def error_for_password(password)
   if !(8..16).cover? password.size
     'Password must be between 8 and 16 characters long.'
-  elsif !(password =~ /\d/ && password =~ /[\W\S]/ && password =~ /[a-z]/i)
+  elsif !(password =~ /\d/ && password =~ /[\W]/ && password =~ /[a-z]/i)
     'Password must contain at least 1 number,'\
     ' 1 special character, and 1 letter.'
   end
