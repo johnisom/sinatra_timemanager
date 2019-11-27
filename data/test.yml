@@ -2,42 +2,42 @@
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-01 08:00:00.000000000 -07:00
-    message: 
+    message: LS at library
   stop: !ruby/object:Entry
     time: 2019-11-01 12:00:00.000000000 -07:00
-    message: 
+    message: lunch break
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-01 14:00:00.000000000 -07:00
-    message: 
+    message: back on it
   stop: !ruby/object:Entry
     time: 2019-11-01 18:00:00.000000000 -07:00
-    message: 
+    message: dinner
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-02 08:00:00.000000000 -07:00
-    message: 
+    message: LS at cafe
   stop: !ruby/object:Entry
     time: 2019-11-02 12:00:00.000000000 -07:00
-    message: 
+    message: lunch
 - !ruby/object:Session
   start: !ruby/object:Entry
-    time: 2019-11-02 14:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-02 16:00:00.000000000 -07:00
+    message: back from gym, work on time manager
   stop: !ruby/object:Entry
     time: 2019-11-02 18:00:00.000000000 -07:00
     message: 
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-03 08:00:00.000000000 -07:00
-    message: 
+    message: LS
   stop: !ruby/object:Entry
     time: 2019-11-03 12:00:00.000000000 -07:00
     message: 
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-03 14:00:00.000000000 -07:00
-    message: 
+    message: LS
   stop: !ruby/object:Entry
     time: 2019-11-03 18:00:00.000000000 -07:00
     message: 
@@ -46,12 +46,12 @@
     time: 2019-11-04 08:00:00.000000000 -07:00
     message: 
   stop: !ruby/object:Entry
-    time: 2019-11-04 12:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-04 10:00:00.000000000 -07:00
+    message: break
 - !ruby/object:Session
   start: !ruby/object:Entry
-    time: 2019-11-04 14:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-04 10:15:40.000000000 -07:00
+    message: ls
   stop: !ruby/object:Entry
     time: 2019-11-04 18:00:00.000000000 -07:00
     message: 
@@ -72,17 +72,17 @@
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-06 08:00:00.000000000 -07:00
-    message: 
+    message: All of this data
   stop: !ruby/object:Entry
     time: 2019-11-06 12:00:00.000000000 -07:00
-    message: 
+    message: is fabricated for example usage!
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-06 14:00:00.000000000 -07:00
-    message: 
+    message: So that you can properly use
   stop: !ruby/object:Entry
     time: 2019-11-06 18:00:00.000000000 -07:00
-    message: 
+    message: all of the view options!
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-07 08:00:00.000000000 -07:00
@@ -99,15 +99,15 @@
     message: 
 - !ruby/object:Session
   start: !ruby/object:Entry
-    time: 2019-11-08 08:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-08 08:26:45.859271067 -07:00
+    message: codewars
   stop: !ruby/object:Entry
-    time: 2019-11-08 12:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-08 14:00:00.000000000 -07:00
+    message: lunch
 - !ruby/object:Session
   start: !ruby/object:Entry
-    time: 2019-11-08 14:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-08 14:34:00.000000000 -07:00
+    message: leetcode
   stop: !ruby/object:Entry
     time: 2019-11-08 18:00:00.000000000 -07:00
     message: 
@@ -142,7 +142,7 @@
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-11 08:00:00.000000000 -07:00
-    message: 
+    message: just a typical day
   stop: !ruby/object:Entry
     time: 2019-11-11 12:00:00.000000000 -07:00
     message: 
@@ -170,17 +170,31 @@
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-13 08:00:00.000000000 -07:00
-    message: 
+    message: this day will
   stop: !ruby/object:Entry
-    time: 2019-11-13 12:00:00.000000000 -07:00
-    message: 
+    time: 2019-11-13 09:00:00.000000000 -07:00
+    message: have a ton of
 - !ruby/object:Session
   start: !ruby/object:Entry
+    time: 2019-11-13 10:00:00.000000000 -07:00
+    message: entries so that
+  stop: !ruby/object:Entry
+    time: 2019-11-13 11:00:00.000000000 -07:00
+    message: you can see the benefit
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-13 12:00:00.000000000 -07:00
+    message: of view options such
+  stop: !ruby/object:Entry
     time: 2019-11-13 14:00:00.000000000 -07:00
-    message: 
+    message: as daily digest
+- !ruby/object:Session
+  start: !ruby/object:Entry
+    time: 2019-11-13 14:04:00.000000000 -07:00
+    message: and
   stop: !ruby/object:Entry
     time: 2019-11-13 18:00:00.000000000 -07:00
-    message: 
+    message: day delimited
 - !ruby/object:Session
   start: !ruby/object:Entry
     time: 2019-11-14 08:00:00.000000000 -07:00
