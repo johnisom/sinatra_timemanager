@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'common_assertions'
+
 # Body content assertions for all endpoints -- signed out
 module SignedOutAssertions
-  def assert_and_refute(assertions, refutations)
-    body = last_response.body
-
-    assertions.each { |str| assert_includes body, str }
-    refutations.each { |str| refute_includes body, str }
-  end
+  include CommonAssertions
 
   def assert_header
     assertions = ['<a class="nav-link" href="/">',
@@ -27,30 +24,6 @@ module SignedOutAssertions
     assertions = ['<h1>Welcome to Time Manager!</h1>', '<h2>New here?</h2>',
                   "<h3>Don't worry. I'm here to help.</h3>",
                   '<h2>Already a user?</h2>', '<h3>You know the drill.</h3>']
-
-    refutations = []
-
-    assert_and_refute(assertions, refutations)
-  end
-
-  def assert_main_help
-    assertions = ['<h1>Help</h1>', '<span class="toc-title">Table of',
-                  '<h2 id="view">View</h2>', '<h3 id="timeframe">Timeframe</h3>',
-                  '<h3 id="view-options">View Options</h3>',
-                  '<h4 id="day-delimited">Day Delimited</h4>',
-                  '<h2 id="start">Start</h2>', '<h2 id="stop">Stop</h2>',
-                  '<h2 id="undo">Undo</h2>']
-
-    refutations = []
-
-    assert_and_refute(assertions, refutations)
-  end
-
-  def assert_main_about
-    assertions = ['<h2>The Application</h2>', '<h2>The Creator</h2>',
-                  '<figure id="profile-pic">', '<img src="/images/profile.png"',
-                  '<figcaption>John Isom</figcaption>',
-                  'id="disclaimer"', '<small']
 
     refutations = []
 
