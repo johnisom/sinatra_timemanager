@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'bcrypt'
 gem 'erubis'
 gem 'fileutils'
+gem 'rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
