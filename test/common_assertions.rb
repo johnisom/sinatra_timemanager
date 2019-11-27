@@ -15,7 +15,11 @@ module CommonAssertions
   end
 
   def assert_flash(message, type = 'neutral')
-    nil
+    assertions = [%(<div class="flash #{type}">), message, '</div>']
+
+    refutations = []
+
+    assert_and_refute(assertions, refutations)
   end
 
   def assert_footer
