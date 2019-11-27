@@ -13,7 +13,7 @@ module SignedOutAssertions
                    '<a class="nav-link" href="/actions">',
                    '<div id="header-name">']
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_index
@@ -23,7 +23,7 @@ module SignedOutAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_sign_in
@@ -39,7 +39,7 @@ module SignedOutAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_sign_up
@@ -53,6 +53,36 @@ module SignedOutAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
+  end
+
+  def assert_get_authorization(path)
+    get path
+
+    assert_equal 302, last_response.status
+
+    # follow redirect back to index/home page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_flash 'You must be signed in to do that.', :danger
+    assert_main_index
+    assert_footer
+  end
+
+  def assert_post_authorization(path, data)
+    post path, data
+
+    assert_equal 302, last_response.status
+
+    # follow redirect back to index/home page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_flash 'You must be signed in to do that.', :danger
+    assert_main_index
+    assert_footer
   end
 end

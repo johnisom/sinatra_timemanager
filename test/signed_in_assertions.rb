@@ -7,7 +7,7 @@ module SignedInAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_index
@@ -15,7 +15,7 @@ module SignedInAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_sign_out
@@ -23,6 +23,6 @@ module SignedInAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 end

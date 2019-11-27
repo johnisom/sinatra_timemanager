@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
@@ -58,52 +59,19 @@ class SignedOutTest < BaseTest
   end
 
   def test_get_sign_out
-    get '/sign-out'
-
-    assert_equal 302, last_response.status
-
-    # follow redirect back to index/home page
-    get last_response['Location']
-
-    assert_status_and_content_type
-    assert_header
-    assert_flash('You must be signed in to do that.', 'danger')
-    assert_main_index
-    assert_footer
+    assert_get_authorization '/sign-out'
   end
 
   def test_get_view
-    get '/view'
-
-    assert_equal 302, last_response.status
-
-    # follow redirect back to index/home page
-    get last_response['Location']
-
-    assert_status_and_content_type
-    assert_header
-    assert_flash('You must be signed in to do that.', 'danger')
-    assert_main_index
-    assert_footer
+    assert_get_authorization '/view'
   end
 
   def test_actions
-    get '/actions'
-
-    assert_equal 302, last_response.status
-
-    # follow redirect back to index/home page
-    get last_response['Location']
-
-    assert_status_and_content_type
-    assert_header
-    assert_flash('You must be signed in to do that.', 'danger')
-    assert_main_index
-    assert_footer
+    assert_get_authorization '/actions'
   end
 
   def test_get_undo
-
+    assert_get_authorization '/actions'
   end
 
   def test_not_found

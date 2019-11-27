@@ -14,12 +14,12 @@ module CommonAssertions
     assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
   end
 
-  def assert_flash(message, type = 'neutral')
+  def assert_flash(message, type = :neutral)
     assertions = [%(<div class="flash #{type}">), message, '</div>']
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_footer
@@ -30,7 +30,7 @@ module CommonAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_help
@@ -44,7 +44,7 @@ module CommonAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 
   def assert_main_about
@@ -55,6 +55,6 @@ module CommonAssertions
 
     refutations = []
 
-    assert_and_refute(assertions, refutations)
+    assert_and_refute assertions, refutations
   end
 end
