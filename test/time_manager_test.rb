@@ -33,4 +33,19 @@ class TimeManagerTest < Minitest::Test
     assert_includes last_response.body, '<a class="nav-link" href="/about">'
     assert_includes last_response.body, '<a class="nav-link" href="/sign-in">'
   end
+
+  def test_home
+    get '/home'
+
+    assert_equal 302, last_response.status
+
+    # Redirect to index
+    get last_response['Location']
+
+    assert_equal 200, last_response.status
+    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+
+    # Make sure it redirects to index
+    assert_includes last_response.body, '<h1>Welcome to Time Manager!</h1>'
+  end
 end
