@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
@@ -15,57 +14,102 @@ class SignedOutTest < BaseTest
   include SignedOutAssertions
 
   def test_index
-    get '/'
+    super
 
-    assert_status_and_content_type
     assert_header
     assert_main_index
   end
 
   def test_home
-    get '/home'
+    super
 
-    assert_equal 302, last_response.status
-
-    # Redirect to index
-    get last_response['Location']
-
-    assert_status_and_content_type
-
-    # Make sure it redirects to index
     assert_header
     assert_main_index
   end
 
   def test_help
-    get '/help'
+    super
 
-    assert_status_and_content_type
     assert_header
-    assert_main_help
   end
 
   def test_about
-    get '/about'
+    super
 
-    assert_status_and_content_type
     assert_header
-    assert_main_about
   end
 
-  def test_sign_in
+  def test_get_sign_in
     get '/sign-in'
 
     assert_status_and_content_type
     assert_header
     assert_main_sign_in
+    assert_footer
   end
 
-  def test_sign_up
+  def test_get_sign_up
     get '/sign-up'
 
     assert_status_and_content_type
     assert_header
     assert_main_sign_up
+    assert_footer
+  end
+
+  def test_get_sign_out
+    get '/sign-out'
+
+    assert_equal 302, last_response.status
+
+    # follow redirect back to index/home page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_flash('You must be signed in to do that.', 'danger')
+    assert_main_index
+    assert_footer
+  end
+
+  def test_get_view
+    get '/view'
+
+    assert_equal 302, last_response.status
+
+    # follow redirect back to index/home page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_flash('You must be signed in to do that.', 'danger')
+    assert_main_index
+    assert_footer
+  end
+
+  def test_actions
+    get '/actions'
+
+    assert_equal 302, last_response.status
+
+    # follow redirect back to index/home page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_flash('You must be signed in to do that.', 'danger')
+    assert_main_index
+    assert_footer
+  end
+
+  def test_get_undo
+
+  end
+
+  def test_not_found
+    super
+
+    assert_header
+    assert_main_index
   end
 end

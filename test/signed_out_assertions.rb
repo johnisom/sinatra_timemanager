@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'common_assertions'
-
 # Body content assertions for all endpoints -- signed out
 module SignedOutAssertions
-  include CommonAssertions
-
   def assert_header
     assertions = ['<a class="nav-link" href="/">',
                   '<a class="nav-link" href="/help">',

@@ -9,6 +9,26 @@ module CommonAssertions
     refutations.each { |str| refute_includes body, str }
   end
 
+  def assert_status_and_content_type
+    assert_equal 200, last_response.status
+    assert_equal 'text/html;charset=utf-8', last_response['Content-Type']
+  end
+
+  def assert_flash(message, type = 'neutral')
+    nil
+  end
+
+  def assert_footer
+    assertions = ['<footer class="flex evenly">',
+                  'href="https://github.com/johnisom/sinatra_timemanager"',
+                  '<img width="50px" src="/images/github.png">',
+                  'John Isom', '<small class="name">&copy; 2019</small>']
+
+    refutations = []
+
+    assert_and_refute(assertions, refutations)
+  end
+
   def assert_main_help
     assertions = ['<h1>Help</h1>', '<span class="toc-title">Table of',
                   '<h2 id="view">View</h2>',
