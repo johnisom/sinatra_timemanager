@@ -56,8 +56,8 @@ module SignedOutAssertions
     assert_and_refute assertions, refutations
   end
 
-  def assert_get_authorization(path)
-    get path
+  def assert_get_authorization(path, **params)
+    get path, params
 
     assert_equal 302, last_response.status
 
@@ -71,8 +71,8 @@ module SignedOutAssertions
     assert_footer
   end
 
-  def assert_post_authorization(path, data)
-    post path, data
+  def assert_post_authorization(path, **params)
+    post path, params
 
     assert_equal 302, last_response.status
 

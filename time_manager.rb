@@ -194,6 +194,8 @@ post '/sign-out' do
 end
 
 post '/start' do
+  check_authorization
+
   message = params[:message] unless params[:message].empty?
   TM.new(session[:username]).start(message: message)
   flash('Time started.')
@@ -204,6 +206,8 @@ rescue StartTwiceError => e
 end
 
 post '/stop' do
+  check_authorization
+
   message = params[:message] unless params[:message].empty?
   TM.new(session[:username]).stop(message: message)
   flash('Time stopped.')
@@ -214,6 +218,8 @@ rescue StopTwiceError => e
 end
 
 post '/undo' do
+  check_authorization
+
   TM.new(session[:username]).undo
   flash('Last entry undone.')
   redirect '/actions'
