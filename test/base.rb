@@ -5,12 +5,12 @@ require 'minitest/test'
 require 'fileutils'
 
 require_relative '../time_manager'
-require_relative 'common_assertions'
+require_relative 'base_assertions'
 
 # Base test class for signed in and signed out tests
 class BaseTest < Minitest::Test
   include Rack::Test::Methods
-  include CommonAssertions
+  include BaseAssertions
 
   def app
     Sinatra::Application

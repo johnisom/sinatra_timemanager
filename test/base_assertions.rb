@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Body content assertions common to being both signed in and signed out
-module CommonAssertions
+module BaseAssertions
   def assert_and_refute(assertions, refutations)
     body = last_response.body
 
