@@ -5,10 +5,9 @@ require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 require 'tilt/erubis'
 require 'bcrypt'
-
 require 'securerandom'
 require 'yaml'
-
+require 'rack/utils'
 require_relative 'lib/tm'
 
 CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
@@ -18,6 +17,8 @@ DATA_PATH = File.expand_path('data', CURR_PATH)
 configure do
   enable :sessions
   set :session_secret, development? ? 'secret' : SecureRandom.hex(100)
+  set :erb, escape_html: true
+
   FileUtils.mkdir_p(CREDS_PATH) unless File.directory?(CREDS_PATH)
 end
 

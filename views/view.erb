@@ -1,5 +1,5 @@
 <div class="flex between" id="view">
-  <div id="view-content"><%= @content %></div>
+  <div id="view-content"><%== @content %></div>
 
   <form id="view-form" class="flex-vertical spaced-form" action="/view">
     <h2>Filter Results</h2>
@@ -15,11 +15,11 @@
 
     <h3>Select View Option</h3>
     <select class="input" name="view_option">
-      <option class="input" value="default"<%= ' selected' if params[:view_option] == 'default' %>>Default</option>
-      <option class="input" value="daily-digest"<%= ' selected' if params[:view_option] == 'daily-digest' %>>Daily Digest</option>
-      <option class="input" value="day-delimited"<%= ' selected' if params[:view_option] == 'day-delimited' %>>Day Delimited</option>
-      <option class="input" value="weekly-digest"<%= ' selected' if params[:view_option] == 'weekly-digest' %>>Weekly Digest</option>
-      <option class="input" value="week-delimited"<%= ' selected' if params[:view_option] == 'week-delimited' %>>Week Delimited</option>
+      <option class="input" value="default"<%== ' selected' if params[:view_option] == 'default' %>>Default</option>
+      <option class="input" value="daily-digest"<%== ' selected' if params[:view_option] == 'daily-digest' %>>Daily Digest</option>
+      <option class="input" value="day-delimited"<%== ' selected' if params[:view_option] == 'day-delimited' %>>Day Delimited</option>
+      <option class="input" value="weekly-digest"<%== ' selected' if params[:view_option] == 'weekly-digest' %>>Weekly Digest</option>
+      <option class="input" value="week-delimited"<%== ' selected' if params[:view_option] == 'week-delimited' %>>Week Delimited</option>
     </select>
 
     <button class="button">Apply Filters</button>

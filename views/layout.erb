@@ -14,9 +14,9 @@
     <header>
       <div class="flex around" id="main-header">
 	<% if session[:username] %>
-	<%= erb :signed_in_header, layout: false %>
+	<%== erb :signed_in_header, layout: false %>
 	<% else %>
-	<%= erb :signed_out_header, layout: false %>
+	<%== erb :signed_out_header, layout: false %>
 	<% end %>
       </div>
 
@@ -28,7 +28,7 @@
     </header>
 
     <main class="center-child">
-      <%= yield %>
+      <%== yield %>
     </main>
 
     <footer class="flex evenly">

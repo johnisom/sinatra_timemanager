@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rack/utils'
+
 require_relative 'timeable'
 
 # Entry class with (optional) message and time
@@ -10,7 +12,7 @@ class Entry
 
   def initialize(message)
     @time = Time.now
-    @message = message
+    @message = Rack::Utils.escape_html(message)
   end
 
   def to_s
