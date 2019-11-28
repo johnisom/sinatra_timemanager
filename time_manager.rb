@@ -7,7 +7,7 @@ require 'tilt/erubis'
 require 'bcrypt'
 require 'securerandom'
 require 'yaml'
-require 'rack/utils'
+
 require_relative 'lib/tm'
 
 CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'

@@ -55,6 +55,7 @@ DEPENDENCIES
   minitest-reporters
   pry
   puma
+  rack
   rack-test
   rake
   sinatra
