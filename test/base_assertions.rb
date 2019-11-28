@@ -20,7 +20,8 @@ module BaseAssertions
   end
 
   def assert_displayed_flash(message, type = :neutral)
-    assertions = [%(<div class="flash #{type} center-child">), message, '</div>']
+    assertions = [%(<div class="flash #{type} center-child">),
+                  message, '</div>']
 
     refutations = []
 

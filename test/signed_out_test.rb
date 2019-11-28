@@ -74,7 +74,7 @@ class SignedOutTest < BaseTest
     assert_main_sign_in 'nonexistent'
     assert_footer
     assert_displayed_flash "Sorry, we couldn't find a "\
-                           "username matching nonexistent.", :danger
+                           'username matching nonexistent.', :danger
   end
 
   def test_post_sign_in_wrong_password
@@ -84,7 +84,7 @@ class SignedOutTest < BaseTest
     assert_header
     assert_main_sign_in 'test'
     assert_footer
-    assert_displayed_flash "Credentials are invalid. Try again.", :danger
+    assert_displayed_flash 'Credentials are invalid. Try again.', :danger
   end
 
   def test_get_sign_up
@@ -108,6 +108,38 @@ class SignedOutTest < BaseTest
     assert_status_and_content_type
     assert_footer
   end
+
+  def test_post_sign_up_username_too_short
+    post '/sign-up', username: 'a', password: 'valid123#$'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up 'a'
+    assert_footer
+    assert_displayed_flash 'Username must be between 2 and'\
+                          ' 16 characters long.', :danger
+
+  end
+
+  def test_post_sign_up_username_too_long
+    post '/sign-up', username: ('a'..'z').to_a.join, password: 'valid123#$'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up ('a'..'z').to_a.join
+    assert_footer
+    assert_displayed_flash 'Username must be between 2 and'\
+                          ' 16 characters long.', :danger
+
+  end
+
+  def test_post_sign_up_bad_username_chars
+    post '/sign-up', username: "6\e\t&s\u1234jk3", password: 'valid123#$'
+  end
+
+  def test_post_sign_up_taken_username; end
+  def test_post_sign_up_bad_password_length; end
+  def test_post_sign_up_bad_password_chars; end
 
   def test_get_sign_out
     assert_get_authorization '/sign-out'
