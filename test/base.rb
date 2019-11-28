@@ -28,13 +28,30 @@ class BaseTest < Minitest::Test
     last_request.env['rack.session'][:flash]
   end
 
+  def copy_credentials
+    tmp_creds_file_path = File.join(::CREDS_PATH, 'credentials.yml')
+    creds_file_path = File.expand_path('../credentials/credentials.yml',
+                                       ::CURR_PATH)
+    content = File.read(creds_file_path)
+    File.write(tmp_creds_file_path, content)
+  end
+
+  def copy_data
+    tmp_data_file_path = File.join(::DATA_PATH, 'test.yml')
+    data_file_path = File.expand_path('../data/test.yml', ::CURR_PATH)
+    content = File.read(data_file_path)
+    File.write(tmp_data_file_path, content)
+  end
+
   def setup
-    require 'pry'; binding.pry
-    FileUtils.mkdir_p(Sinatra::Application::CREDS_PATH)
+    FileUtils.mkdir_p(::CREDS_PATH)
+    FileUtils.mkdir_p(::DATA_PATH)
+    copy_credentials
+    copy_data
   end
 
   def teardown
-    FileUtils.rm_r(Sinatra::Application::CURR_PATH)
+    FileUtils.rm_r(::CURR_PATH)
   end
 
   def test_index

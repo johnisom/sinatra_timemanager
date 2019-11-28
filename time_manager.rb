@@ -13,11 +13,12 @@ require_relative 'lib/tm'
 
 CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
 CREDS_PATH = File.expand_path('credentials', CURR_PATH)
+DATA_PATH = File.expand_path('data', CURR_PATH)
 
 configure do
   enable :sessions
   set :session_secret, development? ? 'secret' : SecureRandom.hex(100)
-  Dir.mkdir(CREDS_PATH) unless File.directory?(CREDS_PATH)
+  FileUtils.mkdir_p(CREDS_PATH) unless File.directory?(CREDS_PATH)
 end
 
 def flash(message, type = :neutral)
