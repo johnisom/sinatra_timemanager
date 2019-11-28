@@ -18,5 +18,6 @@ end
 group :test do
   gem 'minitest'
   gem 'minitest-reporters'
+  gem 'pry'
   gem 'rack-test'
 end

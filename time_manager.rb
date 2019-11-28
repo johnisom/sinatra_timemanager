@@ -11,7 +11,8 @@ require 'yaml'
 
 require_relative 'lib/tm'
 
-CREDS_PATH = File.expand_path('credentials', '.')
+CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
+CREDS_PATH = File.expand_path('credentials', CURR_PATH)
 
 configure do
   enable :sessions

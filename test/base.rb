@@ -2,6 +2,7 @@
 
 require 'rack/test'
 require 'minitest/test'
+require 'fileutils'
 
 require_relative '../time_manager'
 require_relative 'common_assertions'
@@ -13,6 +14,27 @@ class BaseTest < Minitest::Test
 
   def app
     Sinatra::Application
+  end
+
+  def auth_error_message(magic_word)
+    "You must be signed #{magic_word} to do that."
+  end
+
+  def session(**session_info)
+    { 'rack.session' => session_info }
+  end
+
+  def flash
+    last_request.env['rack.session'][:flash]
+  end
+
+  def setup
+    require 'pry'; binding.pry
+    FileUtils.mkdir_p(Sinatra::Application::CREDS_PATH)
+  end
+
+  def teardown
+    FileUtils.rm_r(Sinatra::Application::CURR_PATH)
   end
 
   def test_index

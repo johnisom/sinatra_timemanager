@@ -14,19 +14,41 @@ Minitest::Reporters.use!
 class SignedInTest < BaseTest
   include SignedInAssertions
 
-  def test_help
-    get '/help'
+  def auth_error_message
+    super('out')
+  end
 
-    assert_status_and_content_type
+  def session
+    super(username: 'test')
+  end
+
+  def test_index
+    super
+
     assert_header
-    assert_main_help
+    assert_main_index
+  end
+
+  def test_home
+    super
+
+    assert_header
+    assert_main_index
+  end
+
+  def test_help
+    super
+
+    assert_header
   end
 
   def test_about
-    get '/about'
+    super
 
-    assert_status_and_content_type
     assert_header
-    assert_main_about
+  end
+
+  def test_get_sign_in
+    assert_get_authorization '/sign-in', username: 'user', password: 'pass'
   end
 end

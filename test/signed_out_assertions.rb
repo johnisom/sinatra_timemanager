@@ -55,34 +55,4 @@ module SignedOutAssertions
 
     assert_and_refute assertions, refutations
   end
-
-  def assert_get_authorization(path, **params)
-    get path, params
-
-    assert_equal 302, last_response.status
-
-    # follow redirect back to index/home page
-    get last_response['Location']
-
-    assert_status_and_content_type
-    assert_header
-    assert_flash 'You must be signed in to do that.', :danger
-    assert_main_index
-    assert_footer
-  end
-
-  def assert_post_authorization(path, **params)
-    post path, params
-
-    assert_equal 302, last_response.status
-
-    # follow redirect back to index/home page
-    get last_response['Location']
-
-    assert_status_and_content_type
-    assert_header
-    assert_flash 'You must be signed in to do that.', :danger
-    assert_main_index
-    assert_footer
-  end
 end

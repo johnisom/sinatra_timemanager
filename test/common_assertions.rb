@@ -57,4 +57,29 @@ module CommonAssertions
 
     assert_and_refute assertions, refutations
   end
+
+  def assert_authorization
+    assert_equal 302, last_response.status
+    assert_equal auth_error_message, flash[:message]
+    assert_equal :danger, flash[:type]
+
+    # follow redirect back to index/home page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_flash auth_error_message, :danger
+    assert_main_index
+    assert_footer
+  end
+
+  def assert_get_authorization(path, **params)
+    get path, params, session
+    assert_authorization
+  end
+
+  def assert_post_authorization(path, **params)
+    post path, params, session
+    assert_authorization
+  end
 end

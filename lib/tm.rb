@@ -20,7 +20,8 @@ end
 class TM
   include Viewable
 
-  DATA_PATH = File.expand_path('./data')
+  CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
+  DATA_PATH = File.expand_path('data', CURR_PATH)
 
   attr_reader :sessions
 

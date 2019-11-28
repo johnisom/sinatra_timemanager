@@ -14,6 +14,10 @@ Minitest::Reporters.use!
 class SignedOutTest < BaseTest
   include SignedOutAssertions
 
+  def auth_error_message
+    super('in')
+  end
+
   def test_index
     super
 
@@ -49,6 +53,25 @@ class SignedOutTest < BaseTest
     assert_footer
   end
 
+  def test_post_sign_in_successfull
+    post '/sign-in', username: 'test', password: 'test123@'
+
+    assert_equal 302, last_response.status
+    assert_equal 'You were successfully signed in.', flash[:message]
+    assert_equal :success, flash[:type]
+
+    # follow redirect back to home/index page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_flash 'You were successfully signed in.', :success
+    assert_footer
+  end
+
+  def test_post_sign_in_wrong_username
+
+  end
+
   def test_get_sign_up
     get '/sign-up'
 
@@ -57,6 +80,23 @@ class SignedOutTest < BaseTest
     assert_main_sign_up
     assert_footer
   end
+
+  def test_post_sign_up_successfull
+    post '/sign-up', username: 'tmp', password: 'tmp123@#'
+
+    assert_equal 302, last_response.status
+    assert_equal 'Welcome aboard, tmp!', flash[:message]
+    assert_equal :success, flash[:type]
+
+    # follow redirect back to home/index page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_flash 'Welcome aboard, tmp!', :success
+    assert_footer
+  end
+
+  def 
 
   def test_get_sign_out
     assert_get_authorization '/sign-out'
