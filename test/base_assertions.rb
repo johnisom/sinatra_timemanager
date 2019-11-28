@@ -19,6 +19,14 @@ module BaseAssertions
     assert_equal type, flash[:type]
   end
 
+  def assert_displayed_flash(message, type = :neutral)
+    assertions = [%(<div class="flash #{type} center-child">), message, '</div>']
+
+    refutations = []
+
+    assert_and_refute(assertions, refutations)
+  end
+
   def assert_footer
     assertions = ['<footer class="flex evenly">',
                   'href="https://github.com/johnisom/sinatra_timemanager"',

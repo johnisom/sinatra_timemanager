@@ -66,7 +66,26 @@ class SignedOutTest < BaseTest
     assert_footer
   end
 
-  def test_post_sign_in_wrong_username; end
+  def test_post_sign_in_wrong_username
+    post '/sign-in', username: 'nonexistent', password: 'same'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_in 'nonexistent'
+    assert_footer
+    assert_displayed_flash "Sorry, we couldn't find a "\
+                           "username matching nonexistent.", :danger
+  end
+
+  def test_post_sign_in_wrong_password
+    post '/sign-in', username: 'test', password: 'wrong password'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_in 'test'
+    assert_footer
+    assert_displayed_flash "Credentials are invalid. Try again.", :danger
+  end
 
   def test_get_sign_up
     get '/sign-up'

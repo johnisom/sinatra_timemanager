@@ -21,7 +21,7 @@
       </div>
 
       <% if session[:flash] %>
-      <div class="flash <%= session[:flash][:type] %>">
+      <div class="flash <%= session[:flash][:type] %> center-child">
 	<%= session.delete(:flash)[:message] %>
       </div>
       <% end %>

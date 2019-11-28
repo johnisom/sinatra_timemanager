@@ -26,9 +26,9 @@ module SignedOutAssertions
     assert_and_refute assertions, refutations
   end
 
-  def assert_main_sign_in
+  def assert_main_sign_in(username = '')
     inputs = <<-HTML
-  <input class="input" type="text" name="username" placeholder="Username" value="" autofocus>
+  <input class="input" type="text" name="username" placeholder="Username" value="#{username}" autofocus>
   <input class="input" type="password" name="password" placeholder="Password">
     HTML
 
@@ -42,9 +42,9 @@ module SignedOutAssertions
     assert_and_refute assertions, refutations
   end
 
-  def assert_main_sign_up
+  def assert_main_sign_up(username = '')
     inputs = <<-HTML
-  <input class="input" type="text" name="username" placeholder="Username" value="" autofocus>
+  <input class="input" type="text" name="username" placeholder="Username" value="#{username}" autofocus>
   <input class="input" type="password" name="password" placeholder="Password">
     HTML
 
