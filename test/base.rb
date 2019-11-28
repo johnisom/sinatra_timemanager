@@ -93,12 +93,12 @@ class BaseTest < Minitest::Test
     get '/not/a/path'
 
     assert_equal 302, last_response.status
+    assert_flash "That page doesn't exist", :danger
 
     # follow redirect back to index/home page
     get last_response['Location']
 
     assert_status_and_content_type
-    assert_flash "That page doesn't exist", 'danger'
     assert_footer
   end
 end

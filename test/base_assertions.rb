@@ -15,11 +15,8 @@ module BaseAssertions
   end
 
   def assert_flash(message, type = :neutral)
-    assertions = [%(<div class="flash #{type}">), message, '</div>']
-
-    refutations = []
-
-    assert_and_refute assertions, refutations
+    assert_equal message, flash[:message]
+    assert_equal type, flash[:type]
   end
 
   def assert_footer
@@ -60,15 +57,13 @@ module BaseAssertions
 
   def assert_authorization
     assert_equal 302, last_response.status
-    assert_equal auth_error_message, flash[:message]
-    assert_equal :danger, flash[:type]
+    assert_flash auth_error_message, :danger
 
     # follow redirect back to index/home page
     get last_response['Location']
 
     assert_status_and_content_type
     assert_header
-    assert_flash auth_error_message, :danger
     assert_main_index
     assert_footer
   end

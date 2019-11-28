@@ -53,24 +53,20 @@ class SignedOutTest < BaseTest
     assert_footer
   end
 
-  def test_post_sign_in_successfull
+  def test_post_sign_in_successful
     post '/sign-in', username: 'test', password: 'test123@'
 
     assert_equal 302, last_response.status
-    assert_equal 'You were successfully signed in.', flash[:message]
-    assert_equal :success, flash[:type]
+    assert_flash 'You were successfully signed in.', :success
 
     # follow redirect back to home/index page
     get last_response['Location']
 
     assert_status_and_content_type
-    assert_flash 'You were successfully signed in.', :success
     assert_footer
   end
 
-  def test_post_sign_in_wrong_username
-
-  end
+  def test_post_sign_in_wrong_username; end
 
   def test_get_sign_up
     get '/sign-up'
@@ -81,22 +77,18 @@ class SignedOutTest < BaseTest
     assert_footer
   end
 
-  def test_post_sign_up_successfull
+  def test_post_sign_up_successful
     post '/sign-up', username: 'tmp', password: 'tmp123@#'
 
     assert_equal 302, last_response.status
-    assert_equal 'Welcome aboard, tmp!', flash[:message]
-    assert_equal :success, flash[:type]
+    assert_flash 'Welcome aboard, tmp!', :success
 
     # follow redirect back to home/index page
     get last_response['Location']
 
     assert_status_and_content_type
-    assert_flash 'Welcome aboard, tmp!', :success
     assert_footer
   end
-
-  def 
 
   def test_get_sign_out
     assert_get_authorization '/sign-out'
