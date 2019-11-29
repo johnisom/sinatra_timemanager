@@ -60,16 +60,16 @@ class TM
     update_file
   end
 
+  def last_session
+    @sessions.last || Session.new(start: Entry.new(nil), stop: Entry.new(nil))
+  end
+
   private
 
   def update_file
     filepath = File.join(DATA_PATH, "#{@username}.yml")
     content = Psych.dump(@sessions)
     File.write(filepath, content)
-  end
-
-  def last_session
-    @sessions.last || Session.new(start: Entry.new(nil), stop: Entry.new(nil))
   end
 
   def touchfile(name)
