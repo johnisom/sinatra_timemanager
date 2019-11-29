@@ -18,7 +18,7 @@ module SignedInAssertions
 
   def assert_main_index
     assertions = ['<h2>Click one of the above buttons to get started, ',
-                 '<span class="name">', '</span>!']
+                  '<span class="name">', '</span>!']
 
     refutations = ['<h1>Welcome to Time Manager!</h1>', '<h2>New here?</h2>',
                    "<h3>Don't worry. I'm here to help.</h3>",
@@ -28,6 +28,7 @@ module SignedInAssertions
     assert_and_refute assertions, refutations
   end
 
+  # rubocop:disable Metrics/MethodLength
   def assert_main_sign_out
     buttons = <<-HTML
   <form class="flex-vertical" action="/sign-out" method="POST">
@@ -111,4 +112,5 @@ module SignedInAssertions
 
     assert_and_refute assertions, refutations
   end
+  # rubocop:enable Metrics/MethodLength
 end

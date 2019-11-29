@@ -11,7 +11,7 @@ require_relative 'signed_in_assertions'
 Minitest::Reporters.use!
 
 # Signed out tests
-class SignedInTest < BaseTest
+class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   include SignedInAssertions
 
   def auth_error_message
@@ -55,7 +55,6 @@ class SignedInTest < BaseTest
   def test_post_sign_in
     assert_post_authorization '/sign-in', username: 'test', password: 'test123@'
   end
-
 
   def test_get_sign_up
     assert_get_authorization '/sign-up'
