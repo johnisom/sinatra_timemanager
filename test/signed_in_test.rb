@@ -88,6 +88,23 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
     assert_displayed_flash 'You were successfully signed out.', :success
   end
 
+  def test_view_no_data
+    test_session = { 'rack.session' => { username: 'empty_test' } }
+    get '/view', {}, test_session
+
+    assert_equal 302, last_response.status
+    assert_flash "Can't view without any data!", :danger
+
+    # follow redirect to actions page
+    get last_response['Location'], {}, test_session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash "Can't view without any data!", :danger
+  end
+
   # helper method for view tests
   def helper_view_test
     get '/view', {}, session
@@ -296,8 +313,8 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_post_undo
-    post '/start', {message: 'this will be kept'}, session
-    post '/stop', {message: 'this will be removed'}, session
+    post '/start', { message: 'this will be kept' }, session
+    post '/stop', { message: 'this will be removed' }, session
     post '/undo', {}, session
 
     assert_equal 302, last_response.status
@@ -315,7 +332,16 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_max_undo
-    skip
+    test_session = { 'rack.session' => { username: 'empty_test' } }
+    post '/start', { message: '' }, test_session
+    post '/undo', {}, test_session
+    post '/undo', {}, test_session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash "Can't undo any more!", :danger
   end
 
   def test_not_found
