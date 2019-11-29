@@ -4,6 +4,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'rack'
 
 require_relative 'base'
 require_relative 'signed_out_assertions'
@@ -135,11 +136,57 @@ class SignedOutTest < BaseTest
 
   def test_post_sign_up_bad_username_chars
     post '/sign-up', username: "6\e\t&s\u1234jk3", password: 'valid123#$'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up Rack::Utils.escape_html("6\e\t&s\u1234jk3")
+    assert_footer
+    assert_displayed_flash 'Username must only contain alphanumeric'\
+                           ' characters (0-9, A-z, _).', :danger
   end
 
-  def test_post_sign_up_taken_username; end
-  def test_post_sign_up_bad_password_length; end
-  def test_post_sign_up_bad_password_chars; end
+  def test_post_sign_up_taken_username
+    post '/sign-up', username: 'test', password: 'valid123#$'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up 'test'
+    assert_footer
+    assert_displayed_flash 'Sorry, test is already taken.', :danger
+  end
+
+  def test_post_sign_up_password_too_short
+    post '/sign-up', username: 'valid_uname123', password: '<8chrs'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up 'valid_uname123'
+    assert_footer
+    assert_displayed_flash 'Password must be between 8 and'\
+                           ' 16 characters long.', :danger
+  end
+
+  def test_post_sign_up_password_too_long
+    post '/sign-up', username: 'valid_uname123', password: 'longerthan16chars!'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up 'valid_uname123'
+    assert_footer
+    assert_displayed_flash 'Password must be between 8 and'\
+                           ' 16 characters long.', :danger
+  end
+
+  def test_post_sign_up_bad_password_chars
+    post '/sign-up', username: 'valid_uname123', password: 'JustAlphabetic'
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_up 'valid_uname123'
+    assert_footer
+    assert_displayed_flash 'Password must contain at least 1 number,'\
+                           ' 1 special character, and 1 letter.', :danger
+  end
 
   def test_get_sign_out
     assert_get_authorization '/sign-out'
