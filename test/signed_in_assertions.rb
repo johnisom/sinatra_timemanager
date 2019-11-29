@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'time'
+
+require_relative '../lib/tm.rb'
+
 # Body content assertions for all endpoints -- signed in
 module SignedInAssertions
   def assert_header
@@ -117,4 +121,22 @@ module SignedInAssertions
     assert_and_refute assertions, refutations
   end
   # rubocop:enable Metrics/MethodLength
+
+  def assert_time_start(message)
+    last_session = TM.new('test').last_session
+    start = last_session.start
+
+    refute_predicate last_session, :complete?
+    assert_equal message, start.message
+    assert Time.now - start.time < 1
+  end
+
+  def assert_time_stop(message)
+    last_session = TM.new('test').last_session
+    stop = last_session.stop
+
+    assert_predicate last_session, :complete?
+    assert_equal message, stop.message
+    assert Time.now - stop.time < 1
+  end
 end

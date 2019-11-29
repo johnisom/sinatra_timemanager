@@ -4,6 +4,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'rack'
 
 require_relative 'base'
 require_relative 'signed_in_assertions'
@@ -147,34 +148,173 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_actions
-    skip
+    get '/actions', {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
   end
 
   def test_start_no_message
-    skip
+    post '/start', {message: ''}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time started.'
+    assert_time_start ''
+
+    # follow redirect back to actions page
+    get last_response['Location'], {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Time started.'
   end
 
   def test_start_message
-    skip
+    post '/start', {message: 'An example message'}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time started.'
+    assert_time_start 'An example message'
+
+    # follow redirect back to actions page
+    get last_response['Location'], {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Time started.'
+  end
+
+  def test_start_hack_message
+    message = '<script>alert("Will this alert?");</script>'
+
+    post '/start', {message: message}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time started.'
+    assert_time_start Rack::Utils.escape_html(message)
+
+    # follow redirect back to actions page
+    get last_response['Location'], {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Time started.'
+  end
+
+  def test_start_twice
+    post '/start', {message: ''}, session
+    post '/start', {message: ''}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash "Can't start twice in a row!", :danger
   end
 
   def test_stop_no_message
-    skip
+    post '/start', {message: ''}, session # to avoid stop twice error
+    post '/stop', {message: ''}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time stopped.'
+    assert_time_stop ''
+
+    # follow redirect back to actions page
+    get last_response['Location'], {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Time stopped.'
   end
 
   def test_stop_message
-    skip
+    post '/start', {message: ''}, session # to avoid stop twice error
+    post '/stop', {message: 'An example message'}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time stopped.'
+    assert_time_stop 'An example message'
+
+    # follow redirect back to actions page
+    get last_response['Location'], {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Time stopped.'
+  end
+
+  def test_stop_hack_message
+    message = '<script>alert("Will this alert?");</script>'
+
+    post '/start', {message: ''}, session # to avoid stop twice error
+    post '/stop', {message: message}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time stopped.'
+    assert_time_stop Rack::Utils.escape_html(message)
+
+    # follow redirect back to actions page
+    get last_response['Location'], {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Time stopped.'
+  end
+
+  def test_stop_twice
+    post '/stop', {message: ''}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash "Can't stop twice in a row!", :danger
   end
 
   def test_get_undo
-    skip
+    get '/undo', {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_undo
+    assert_footer
   end
 
   def test_post_undo
-    skip
+    post '/start', {message: 'this will be kept'}, session
+    post '/stop', {message: 'this will be removed'}, session
+    post '/undo', {}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Last entry undone.'
+    assert_time_start 'this will be kept'
+
+    # follow redirect back to home/index page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+    assert_displayed_flash 'Last entry undone.'
   end
 
-  def test_back_out_undo
+  def test_max_undo
     skip
   end
 
