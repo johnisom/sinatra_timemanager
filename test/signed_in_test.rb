@@ -65,51 +65,85 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_get_sign_out
-    skip
+    get '/sign-out', {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_sign_out
+    assert_footer
   end
 
   def test_post_sign_out
-    skip
+    post '/sign-out', {}, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'You were successfully signed out.', :success
+
+    # follow redirect back to home/index page
+    get last_response['Location']
+
+    assert_status_and_content_type
+    assert_footer
+    assert_displayed_flash 'You were successfully signed out.', :success
+  end
+
+  # helper method for view tests
+  def helper_view_test
+    get '/view', {}, session
+
+    assert_status_and_content_type
+    assert_header
+    assert_main_view
+    assert_footer
   end
 
   def test_view_default
-    skip
+    helper_view_test
   end
 
   def test_view_daily_digest
     skip
+    helper_view_test
   end
 
   def test_view_day_delimited
     skip
+    helper_view_test
   end
 
   def test_view_weekly_digest
     skip
+    helper_view_test
   end
 
   def test_view_week_delimited
     skip
+    helper_view_test
   end
 
   def test_view_default_16_to_13
     skip
+    helper_view_test
   end
 
   def test_view_daily_digest_16_to_13
     skip
+    helper_view_test
   end
 
   def test_view_day_delimited_16_to_13
     skip
+    helper_view_test
   end
 
   def test_view_weekly_digest_16_to_13
     skip
+    helper_view_test
   end
 
   def test_view_week_delimited_16_to_13
     skip
+    helper_view_test
   end
 
   def test_actions
