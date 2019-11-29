@@ -194,11 +194,11 @@ class SignedOutTest < BaseTest # rubocop:disable Metrics/ClassLength
     assert_post_authorization '/sign-out'
   end
 
-  def test_get_view
+  def test_view
     assert_get_authorization '/view'
   end
 
-  def test_get_view_with_params
+  def test_view_with_params
     assert_get_authorization '/view', timeframe_from: 5, timeframe_to: 2
   end
 

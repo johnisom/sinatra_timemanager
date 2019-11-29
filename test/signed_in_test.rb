@@ -49,6 +49,106 @@ class SignedInTest < BaseTest
   end
 
   def test_get_sign_in
-    assert_get_authorization '/sign-in', username: 'user', password: 'pass'
+    assert_get_authorization '/sign-in'
+  end
+
+  def test_post_sign_in
+    assert_post_authorization '/sign-in', username: 'test', password: 'test123@'
+  end
+
+
+  def test_get_sign_up
+    assert_get_authorization '/sign-up'
+  end
+
+  def test_post_sign_up
+    assert_post_authorization '/sign-up', username: 'hi', password: 'w0rld$8d'
+  end
+
+  def test_get_sign_out
+    skip
+  end
+
+  def test_post_sign_out
+    skip
+  end
+
+  def test_view_default
+    skip
+  end
+
+  def test_view_daily_digest
+    skip
+  end
+
+  def test_view_day_delimited
+    skip
+  end
+
+  def test_view_weekly_digest
+    skip
+  end
+
+  def test_view_week_delimited
+    skip
+  end
+
+  def test_view_default_16_to_13
+    skip
+  end
+
+  def test_view_daily_digest_16_to_13
+    skip
+  end
+
+  def test_view_day_delimited_16_to_13
+    skip
+  end
+
+  def test_view_weekly_digest_16_to_13
+    skip
+  end
+
+  def test_view_week_delimited_16_to_13
+    skip
+  end
+
+  def test_actions
+    skip
+  end
+
+  def test_start_no_message
+    skip
+  end
+
+  def test_start_message
+    skip
+  end
+
+  def test_stop_no_message
+    skip
+  end
+
+  def test_stop_message
+    skip
+  end
+
+  def test_get_undo
+    skip
+  end
+
+  def test_post_undo
+    skip
+  end
+
+  def test_back_out_undo
+    skip
+  end
+
+  def test_not_found
+    super
+
+    assert_header
+    assert_main_index
   end
 end

@@ -21,7 +21,8 @@ module SignedOutAssertions
                   "<h3>Don't worry. I'm here to help.</h3>",
                   '<h2>Already a user?</h2>', '<h3>You know the drill.</h3>']
 
-    refutations = []
+    refutations = ['<h2>Click one of the above buttons to get started, ',
+                   '<span class="name">', '</span>!']
 
     assert_and_refute assertions, refutations
   end
