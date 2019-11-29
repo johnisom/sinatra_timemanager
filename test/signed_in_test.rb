@@ -23,6 +23,21 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
     super(username: 'test')
   end
 
+  # helper method for starts
+  def helper_start_test(message, encoded_message = nil)
+    post '/start', { message: message }, session
+
+    assert_equal 302, last_response.status
+    assert_flash 'Time started.'
+    assert_time_start(encoded_message || message)
+
+    # follow redirect back to actions page
+    get last_response['Location']
+
+    assert_all_actions
+    assert_displayed_flash 'Time started.'
+  end
+
   def test_index
     super
 
@@ -98,208 +113,144 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
     # follow redirect to actions page
     get last_response['Location'], {}, test_session
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
     assert_displayed_flash "Can't view without any data!", :danger
   end
 
-  # helper method for view tests
-  def helper_view_test
+  def test_view_default
+    skip
     get '/view', {}, session
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_view
-    assert_footer
-  end
-
-  def test_view_default
-    helper_view_test
+    assert_all_view
   end
 
   def test_view_daily_digest
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_day_delimited
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_weekly_digest
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_week_delimited
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_default_16_to_13
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_daily_digest_16_to_13
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_day_delimited_16_to_13
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_weekly_digest_16_to_13
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_view_week_delimited_16_to_13
     skip
-    helper_view_test
+    get '/view', {}, session
+
+    assert_all_view
   end
 
   def test_actions
     get '/actions', {}, session
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
   end
 
   def test_start_no_message
-    post '/start', {message: ''}, session
-
-    assert_equal 302, last_response.status
-    assert_flash 'Time started.'
-    assert_time_start ''
-
-    # follow redirect back to actions page
-    get last_response['Location'], {}, session
-
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
-    assert_displayed_flash 'Time started.'
+    helper_start_test ''
   end
 
   def test_start_message
-    post '/start', {message: 'An example message'}, session
-
-    assert_equal 302, last_response.status
-    assert_flash 'Time started.'
-    assert_time_start 'An example message'
-
-    # follow redirect back to actions page
-    get last_response['Location'], {}, session
-
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
-    assert_displayed_flash 'Time started.'
+    helper_start_test 'An example message'
   end
 
   def test_start_hack_message
     message = '<script>alert("Will this alert?");</script>'
+    encoded_message = Rack::Utils.escape_html(message)
 
-    post '/start', {message: message}, session
-
-    assert_equal 302, last_response.status
-    assert_flash 'Time started.'
-    assert_time_start Rack::Utils.escape_html(message)
-
-    # follow redirect back to actions page
-    get last_response['Location'], {}, session
-
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
-    assert_displayed_flash 'Time started.'
+    helper_start_test message, encoded_message
   end
 
   def test_start_twice
-    post '/start', {message: ''}, session
-    post '/start', {message: ''}, session
+    post '/start', { message: '' }, session
+    post '/start', { message: '' }, session
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
     assert_displayed_flash "Can't start twice in a row!", :danger
   end
 
-  def test_stop_no_message
-    post '/start', {message: ''}, session # to avoid stop twice error
-    post '/stop', {message: ''}, session
+  # helper method for stops
+  def helper_stop_test(message, encoded_message = nil)
+    post '/start', { message: '' }, session # to avoid stop twice error
+    post '/stop', { message: message }, session
 
     assert_equal 302, last_response.status
     assert_flash 'Time stopped.'
-    assert_time_stop ''
+    assert_time_stop(encoded_message || message)
 
     # follow redirect back to actions page
-    get last_response['Location'], {}, session
+    get last_response['Location']
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
     assert_displayed_flash 'Time stopped.'
   end
 
+  def test_stop_no_message
+    helper_stop_test ''
+  end
+
   def test_stop_message
-    post '/start', {message: ''}, session # to avoid stop twice error
-    post '/stop', {message: 'An example message'}, session
-
-    assert_equal 302, last_response.status
-    assert_flash 'Time stopped.'
-    assert_time_stop 'An example message'
-
-    # follow redirect back to actions page
-    get last_response['Location'], {}, session
-
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
-    assert_displayed_flash 'Time stopped.'
+    helper_stop_test 'An example message'
   end
 
   def test_stop_hack_message
     message = '<script>alert("Will this alert?");</script>'
+    encoded_message = Rack::Utils.escape_html(message)
 
-    post '/start', {message: ''}, session # to avoid stop twice error
-    post '/stop', {message: message}, session
-
-    assert_equal 302, last_response.status
-    assert_flash 'Time stopped.'
-    assert_time_stop Rack::Utils.escape_html(message)
-
-    # follow redirect back to actions page
-    get last_response['Location'], {}, session
-
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
-    assert_displayed_flash 'Time stopped.'
+    helper_stop_test message, encoded_message
   end
 
   def test_stop_twice
-    post '/stop', {message: ''}, session
+    post '/stop', { message: '' }, session
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
     assert_displayed_flash "Can't stop twice in a row!", :danger
   end
 
@@ -312,7 +263,7 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
     assert_footer
   end
 
-  def test_post_undo
+  def test_post_undo # rubocop:disable Metrics/AbcSize
     post '/start', { message: 'this will be kept' }, session
     post '/stop', { message: 'this will be removed' }, session
     post '/undo', {}, session
@@ -324,10 +275,7 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
     # follow redirect back to home/index page
     get last_response['Location']
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
     assert_displayed_flash 'Last entry undone.'
   end
 
@@ -337,10 +285,7 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
     post '/undo', {}, test_session
     post '/undo', {}, test_session
 
-    assert_status_and_content_type
-    assert_header
-    assert_main_actions
-    assert_footer
+    assert_all_actions
     assert_displayed_flash "Can't undo any more!", :danger
   end
 

@@ -5,7 +5,7 @@ require 'time'
 require_relative '../lib/tm.rb'
 
 # Body content assertions for all endpoints -- signed in
-module SignedInAssertions
+module SignedInAssertions # rubocop:disable Metrics/ModuleLength
   def assert_header
     assertions = ['<a class="nav-link" href="/">',
                   '<a class="nav-link" href="/help">',
@@ -138,5 +138,19 @@ module SignedInAssertions
     assert_predicate last_session, :complete?
     assert_equal message, stop.message
     assert Time.now - stop.time < 1
+  end
+
+  def assert_all_actions
+    assert_status_and_content_type
+    assert_header
+    assert_main_actions
+    assert_footer
+  end
+
+  def assert_all_view
+    assert_status_and_content_type
+    assert_header
+    assert_main_view
+    assert_footer
   end
 end
