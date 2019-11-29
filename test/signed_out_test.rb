@@ -12,7 +12,7 @@ require_relative 'signed_out_assertions'
 Minitest::Reporters.use!
 
 # Signed out tests
-class SignedOutTest < BaseTest
+class SignedOutTest < BaseTest # rubocop:disable Metrics/ClassLength
   include SignedOutAssertions
 
   def auth_error_message
@@ -119,7 +119,6 @@ class SignedOutTest < BaseTest
     assert_footer
     assert_displayed_flash 'Username must be between 2 and'\
                           ' 16 characters long.', :danger
-
   end
 
   def test_post_sign_up_username_too_long
@@ -127,11 +126,10 @@ class SignedOutTest < BaseTest
 
     assert_status_and_content_type
     assert_header
-    assert_main_sign_up ('a'..'z').to_a.join
+    assert_main_sign_up(('a'..'z').to_a.join)
     assert_footer
     assert_displayed_flash 'Username must be between 2 and'\
                           ' 16 characters long.', :danger
-
   end
 
   def test_post_sign_up_bad_username_chars
