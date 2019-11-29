@@ -12,6 +12,18 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/*_test.rb']
 end
 
+Rake::TestTask.new(:test_signed_in) do |t|
+  t.libs << 'test'
+  t.libs << 'lib'
+  t.test_files = FileList['test/*_in_test.rb']
+end
+
+Rake::TestTask.new(:test_signed_out) do |t|
+  t.libs << 'test'
+  t.libs << 'lib'
+  t.test_files = FileList['test/*_out_test.rb']
+end
+
 desc 'Display inventory of all visible files in the project'
 task :inventory do
   sh 'tree -CF --dirsfirst'

@@ -65,6 +65,7 @@ class SignedOutTest < BaseTest # rubocop:disable Metrics/ClassLength
 
     assert_status_and_content_type
     assert_footer
+    assert_displayed_flash 'You were successfully signed in.', :success
   end
 
   def test_post_sign_in_wrong_username
@@ -108,6 +109,7 @@ class SignedOutTest < BaseTest # rubocop:disable Metrics/ClassLength
 
     assert_status_and_content_type
     assert_footer
+    assert_displayed_flash 'Welcome aboard, tmp!', :success
   end
 
   def test_post_sign_up_username_too_short

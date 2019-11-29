@@ -55,26 +55,26 @@ class BaseTest < Minitest::Test
   end
 
   def test_index
-    get '/'
+    get '/', {}, session
 
     assert_status_and_content_type
     assert_footer
   end
 
   def test_home
-    get '/home'
+    get '/home', {}, session
 
     assert_equal 302, last_response.status
 
     # follow redirect back to index/home page
-    get last_response['Location']
+    get last_response['Location'], {}, session
 
     assert_status_and_content_type
     assert_footer
   end
 
   def test_help
-    get '/help'
+    get '/help', {}, session
 
     assert_status_and_content_type
     assert_main_help
@@ -82,7 +82,7 @@ class BaseTest < Minitest::Test
   end
 
   def test_about
-    get '/about'
+    get '/about', {}, session
 
     assert_status_and_content_type
     assert_main_about
@@ -90,13 +90,13 @@ class BaseTest < Minitest::Test
   end
 
   def test_not_found
-    get '/not/a/path'
+    get '/not/a/path', {}, session
 
     assert_equal 302, last_response.status
     assert_flash "That page doesn't exist", :danger
 
     # follow redirect back to index/home page
-    get last_response['Location']
+    get last_response['Location'], {}, session
 
     assert_status_and_content_type
     assert_footer

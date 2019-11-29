@@ -30,16 +30,20 @@ module SignedInAssertions
 
   # rubocop:disable Metrics/MethodLength
   def assert_main_sign_out
-    buttons = <<-HTML
+    button1 = <<-HTML
   <form class="flex-vertical" action="/sign-out" method="POST">
     <button class="button">Yes, sign me out</button>
   </form>
+    HTML
+
+    button2 = <<-HTML
   <form class="flex-vertical" action="/">
     <button class="button">No, I changed my mind</button>
   </form>
     HTML
 
-    assertions = ['<h2>Are you sure you want to sign out?</h2>', buttons]
+    assertions = ['<h2>Are you sure you want to sign out?</h2>',
+                  button1, button2]
 
     refutations = []
 
