@@ -120,6 +120,38 @@ module SignedInAssertions # rubocop:disable Metrics/ModuleLength
 
     assert_and_refute assertions, refutations
   end
+
+  def assert_content_view(mode)
+    assertions = ['<div class="preamble">',
+                  "<span>Chosen display: </span>\n  "\
+                  "<span id=\"choice\">#{mode}</span>",
+                  '<span>Showing results from </span>',
+                  '<span class="title">Average: </span>',
+                  '<span class="title">Total: </span>']
+
+    refutations = []
+
+    assert_and_refute assertions, refutations
+  end
+
+  def assert_timeframe_view(from, to)
+    timeframe_preamble = <<~HTML
+      <div class="preamble">
+        <span>Showing results from </span>
+        <span class="timeframe-display">#{from}</span>
+        <span>days ago to </span>
+        <span class="timeframe-display">#{to}</span>
+        <span>days ago</span>
+      </div>
+    HTML
+
+    assertions = [timeframe_preamble]
+
+    refutations = []
+
+    assert_and_refute assertions, refutations
+  end
+
   # rubocop:enable Metrics/MethodLength
 
   def assert_time_start(message)

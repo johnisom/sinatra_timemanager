@@ -62,7 +62,11 @@ module Viewable
   end
 
   def error_for_timeframes(timeframe_from, timeframe_to)
-    'Invalid timeframe range.' if timeframe_from < timeframe_to
+    if timeframe_from.negative? || timeframe_to.negative?
+      'Timeframe cannot be negative.'
+    elsif timeframe_from < timeframe_to
+      'Invalid timeframe range.'
+    end
   end
 
   def max_timeframe

@@ -118,73 +118,102 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_view_default
-    skip
     get '/view', {}, session
 
     assert_all_view
+    assert_content_view 'DEFAULT'
   end
 
   def test_view_daily_digest
-    skip
-    get '/view', {}, session
+    get '/view', { view_option: 'daily-digest' }, session
 
     assert_all_view
+    assert_content_view 'DAILY DIGEST'
   end
 
   def test_view_day_delimited
-    skip
-    get '/view', {}, session
+    get '/view', { view_option: 'day-delimited' }, session
 
     assert_all_view
+    assert_content_view 'DAY DELIMITED'
   end
 
   def test_view_weekly_digest
-    skip
-    get '/view', {}, session
+    get '/view', { view_option: 'weekly-digest' }, session
 
     assert_all_view
+    assert_content_view 'WEEKLY DIGEST'
   end
 
   def test_view_week_delimited
-    skip
-    get '/view', {}, session
+    get '/view', { view_option: 'week-delimited' }, session
 
     assert_all_view
+    assert_content_view 'WEEK DELIMITED'
   end
 
-  def test_view_default_16_to_13
-    skip
-    get '/view', {}, session
+  def test_view_default_with_timeframe
+    get '/view', { timeframe_from: 13, timeframe_to: 8 }, session
 
     assert_all_view
+    assert_content_view 'DEFAULT'
+    assert_timeframe_view 13, 8
   end
 
-  def test_view_daily_digest_16_to_13
-    skip
-    get '/view', {}, session
+  def test_view_daily_digest_with_timeframe
+    params = { view_option: 'daily-digest',
+               timeframe_from: 13, timeframe_to: 8 }
+    get '/view', params, session
 
     assert_all_view
+    assert_content_view 'DAILY DIGEST'
+    assert_timeframe_view 13, 8
   end
 
-  def test_view_day_delimited_16_to_13
-    skip
-    get '/view', {}, session
+  def test_view_day_delimited_with_timeframe
+    params = { view_option: 'day-delimited',
+               timeframe_from: 26, timeframe_to: 2 }
+    get '/view', params, session
 
     assert_all_view
+    assert_content_view 'DAY DELIMITED'
+    assert_timeframe_view 26, 2
   end
 
-  def test_view_weekly_digest_16_to_13
-    skip
-    get '/view', {}, session
+  def test_view_weekly_digest_with_timeframe
+    params = { view_option: 'weekly-digest',
+               timeframe_from: 5, timeframe_to: 4 }
+    get '/view', params, session
 
     assert_all_view
+    assert_content_view 'WEEKLY DIGEST'
+    assert_timeframe_view 5, 4
   end
 
-  def test_view_week_delimited_16_to_13
-    skip
-    get '/view', {}, session
+  def test_view_week_delimited_with_timeframe
+    params = { view_option: 'week-delimited',
+               timeframe_from: 90, timeframe_to: 34 }
+    get '/view', params, session
 
     assert_all_view
+    assert_content_view 'WEEK DELIMITED'
+    assert_timeframe_view 90, 34
+  end
+
+  def test_view_negative_timeframe
+    get '/view', { timeframe_from: -1, timeframe_to: -4 }, session
+
+    assert_all_view
+    assert_displayed_flash 'Timeframe cannot be negative.', :danger
+    assert_includes last_response.body, '<div id="shrug">¯\_(ツ)_/¯</div>'
+  end
+
+  def test_view_invalid_timeframe
+    get '/view', { timeframe_from: 5, timeframe_to: 6 }, session
+
+    assert_all_view
+    assert_displayed_flash 'Invalid timeframe range.', :danger
+    assert_includes last_response.body, '<div id="shrug">¯\_(ツ)_/¯</div>'
   end
 
   def test_actions
