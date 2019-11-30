@@ -39,3 +39,20 @@ task :rubocop, [:arg] do |_, args|
   else sh 'rubocop -a .'
   end
 end
+
+desc 'Give wc info for all files in the project that I wrote.'
+task :wc do
+  files = %w[Rakefile
+             Gemfile
+             Procfile
+             config.ru
+             README.md
+             time_manager.rb
+             data/test.yml
+             public/stylesheets/time_manager.css] +
+          Dir['test/*.rb'] +
+          Dir['lib/*.rb'] +
+          Dir['views/*.erb']
+
+  sh "wc #{files.join(' ')}"
+end
