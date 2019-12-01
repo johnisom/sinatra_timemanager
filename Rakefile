@@ -66,8 +66,8 @@ end
 desc 'Add all files and commit with message, pushing to remote repos.'
 task :super_git, [:message] do |_, args|
   message = args[:message]
+  remotes = `git remote`.split
   sh 'git add .'
   sh %(git commit -m "#{message}")
-  sh 'git push heroku master'
-  sh 'git push origin master'
+  remotes.each { |remote| sh "git push #{remote}" }
 end
