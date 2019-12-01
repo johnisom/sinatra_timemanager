@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'coveralls'
+Coveralls.wear!
+
 ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
@@ -11,7 +14,7 @@ require_relative 'signed_in_assertions'
 
 Minitest::Reporters.use!
 
-# Signed out tests
+# Signed in tests
 class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   include SignedInAssertions
 

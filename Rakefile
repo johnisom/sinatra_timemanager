@@ -63,11 +63,11 @@ task :bye_emacs do
   sh "rm #{files}"
 end
 
-desc 'Add all files and commit with message, pushing to heroku and origin repos.'
+desc 'Add all files and commit with message, pushing to remote repos.'
 task :super_git, [:message] do |_, args|
   message = args[:message]
-  sh "git add ."
-  sh "git commit -m #{message}"
-  sh "git push heroku master"
-  sh "git push origin master"
+  sh 'git add .'
+  sh %(git commit -m "#{message}")
+  sh 'git push heroku master'
+  sh 'git push origin master'
 end
