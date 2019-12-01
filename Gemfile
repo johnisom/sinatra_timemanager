@@ -6,6 +6,7 @@ gem 'bcrypt'
 gem 'erubis'
 gem 'fileutils'
 gem 'rack'
+gem 'rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
@@ -23,7 +24,6 @@ group :test do
 end
 
 group :development do
-  gem 'rake'
   gem 'rubocop'
 end
 
