@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/johnisom/sinatra_timemanager.svg?branch=master)](https://travis-ci.org/johnisom/sinatra_timemanager)
 [![Coverage Status](https://coveralls.io/repos/github/johnisom/sinatra_timemanager/badge.svg?branch=master)](https://coveralls.io/github/johnisom/sinatra_timemanager?branch=master)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![codebeat badge](https://codebeat.co/badges/4f263840-af20-429e-8493-697f7c2dbfff)](https://codebeat.co/projects/github-com-johnisom-sinatra_timemanager-master)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Made With Love](https://img.shields.io/badge/made%20with-❤-f00)](https://images.unsplash.com/photo-1510771463146-e89e6e86560e)
 
 Time Manager is a [Sinatra][sinatra] web application for tracking study/work time so that you know exactly how many of your precious hours are going to good use. The web app is hosted [here][time-manager] on Heroku and the Github repository is [here][github].
 
