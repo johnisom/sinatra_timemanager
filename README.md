@@ -1,10 +1,3 @@
-<style>
-.screenshot {
-	box-shadow: 0px 0px 5px 2px rgba(0, 0, 255, 0.3);
-	width: 500px;
-}
-</style>
-
 # Time Manager
 
 [![Build Status](https://travis-ci.org/johnisom/sinatra_timemanager.svg?branch=master)](https://travis-ci.org/johnisom/sinatra_timemanager)
@@ -25,7 +18,7 @@ Additional help and instructions on how to use this application can be found on 
 
 ### 1) Go To [The Time Manager][time-manager]
 <p align="center">
-  <img alt="Home Page Signed Out" src="examples/home-signed-out.jpg" class="screenshot">
+  <img alt="Home Page Signed Out" src="examples/home-signed-out.jpg">
 </p>
 
 Here you'll find all the links and pages that you can access in your current state of being signed out,
@@ -33,7 +26,7 @@ as well as simple first time instructions on the home (current) page.
 
 ### 2) Go To The [Help Page][help]
 <p align="center">
-  <img alt="Help Page" src="examples/help.jpg" class="screenshot">
+  <img alt="Help Page" src="examples/help.jpg">
 </p>
 
 Here you can read up on all of the different commands: what they do and how to use them.
@@ -41,7 +34,7 @@ It is suggested you read this whole section before using this application.
 
 ### 3) [Sign In][sign-in]
 <p align="center">
-  <img alt="Sign In Page" src="examples/sign-in.jpg" class="screenshot">
+  <img alt="Sign In Page" src="examples/sign-in.jpg">
 </p>
 
 If you already have an account, you can just sign in here and get right to work. If you don't, you may
@@ -49,13 +42,13 @@ create one or use the test account that is free for everybody to use as explaine
 at the bottom of the *About* section:
 
 <p align="center">
-  <img alt="Disclaimer for Heroku's ephemeral file system" src="examples/disclaimer.jpg" class="screenshot">
+  <img alt="Disclaimer for Heroku's ephemeral file system" src="examples/disclaimer.jpg">
 </p>
 
 
 ### 4) Or, Alternatively, [Sign Up][sign-up]
 <p align="center">
-  <img alt="Sign Up Page" src="examples/sign-up.jpg" class="screenshot">
+  <img alt="Sign Up Page" src="examples/sign-up.jpg">
 </p>
 
 If you decide to use this application with your own user, it is very important that you are connected to
@@ -64,19 +57,19 @@ to see that it has a lock icon and says that your connection is secure. If you v
 (you must double-click in Chrome, Firefox and Edge show by default), You will see something like this:
 
 <p align="center">
-  <img alt="Secure URL Example" src="examples/secure-url.jpg" class="screenshot">
+  <img alt="Secure URL Example" src="examples/secure-url.jpg">
 </p>
 
 Once you have signed up, you will now see that your header has changed and has a few additional buttons, one
 of which is highligthed in this screenshot:
 
 <p align="center">
-  <img alt="Signed In Header with 'About' Highlighted" src="examples/header-signed-in.jpg" class="screenshot">
+  <img alt="Signed In Header with 'About' Highlighted" src="examples/header-signed-in.jpg">
 </p>
 
 ### 5) Do An Action
 <p align="center">
-  <img alt="Actions Page" src="examples/actions.jpg" class="screenshot">
+  <img alt="Actions Page" src="examples/actions.jpg">
 </p>
 
 This is the control terminal of the application. You can start your time, stop it, or undo the last start or stop that you did.
@@ -85,7 +78,7 @@ Be careful with the actions that you commit here. Currently, there is no feature
 
 ### 6) View Logged Time
 <p align="center">
-  <img alt="Default View Page" src="examples/view-default.jpg" class="screenshot">
+  <img alt="Default View Page" src="examples/view-default.jpg">
 </p>
 
 This is by no doubt the heart of the application.
@@ -95,7 +88,7 @@ get sufficient help on the [Timeframe][timeframe] and [View Options][view-option
 
 ### 7) Sign Out (optional)
 <p align="center">
-  <img alt="Sign Out Page" src="examples/sign-out.jpg" class="screenshot">
+  <img alt="Sign Out Page" src="examples/sign-out.jpg">
 </p>
 
 Once you've finished using the application, go ahead and sign out. While not mandantory, it is reccommended as your session will last the duration that Heorku's dyno is up and running, which is approximately a full day.
