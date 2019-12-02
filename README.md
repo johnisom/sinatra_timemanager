@@ -8,8 +8,6 @@
 
 Time Manager is a [Sinatra][sinatra] web application for tracking study/work time so that you know exactly how many of your precious hours are going to good use. The web app is hosted [here][time-manager] on Heroku and the Github repository is [here][github].
 
-Inspiration for this app comes from a similar command-line application that I had previously made with Python. The Github repository for that little project can be found [here][python-tm].
-
 This app was created as an optional project for [Launch School][ls]'s RB175 course. The two other optional projects I created are the games [Tic Tac Toe][ttt] and [Twenty-One][twenty-one].
 
 ## Usage
@@ -99,13 +97,44 @@ Here is an example with Timeframe set from *19* to *13* days ago with the view o
 
 Once you've finished using the application, go ahead and sign out. While not mandantory, it is reccommended as your session will last the duration that Heorku's dyno is up and running, which is approximately a full day.
 
+## Inspiration
+
+TL;DR: Inspired by [this][python-tm].
+
+The design and idea for this app comes from a similar command-line application that I had previously made with Python. The Github repository for that little project can be found [here][python-tm]. The impact that my command-line version had on the web application becomes very apparent when you look at the [View][view] page.
+
+I created the original command-line version of this application partly in response to a challenge of getting 400 hours in between 2019-11-08–2019-12-31 and partly because I didn't have any idea where my time was *actually* going. At the very least, I needed a tool to help me to track just the raw time going towards study-related stuff, and I didn't want to have to learn to use Microsoft Excel or to manually calculate the time.
+
+Out of this desire came a command-line prototype, implemented in Python, that allowed me to track my raw time as well as displaying each study session. I could just type `time-manager john start` and `time-manager john stop` into my terminal, carefree, and it would take care of it all for me.
+
+However, I quickly came to the realization that this was simply not enough. Sure, I can track my time, sparing me the need to manually write my entries down, but how would I know *exactly* what it was going to? Or how could I quickly view results for each day?
+
+Enter messages and view options.
+
+Implementing messages was easy. All I had to do was change how the data was stored and parsed, and then I had a message I could display.
+
+View options? Not so much.
+
+They required lots of logic to summarize and display and separate, which is reflected by how powerful they can be. No, they won't magically change your lives, but they spare you the mental work that I so desperately wanted to avoid that caused me to make this application in the first place.
+
+After many more iterations of this cycle, I found myself with a command-line application to use on the daily as well as a web aplication to demonstrate my abilities and give my programmings skills a little stretch.
+
+## Limitations
+
+This is a fully-functional application that can store usernames and [bcrypt][bcrypt] encrypted password hashes. However, the server that it is hosted on, Heroku, does not support these features, as breifly explained in this disclaimer:
+<p align="center">
+  <img alt="Disclaimer for Heroku's ephemeral file system" src="examples/disclaimer.png">
+</p>
+
+I don't plan on making the web version have permanent accounts or data storage anytime soon, but if requests for that come in, I'll consider it because all it requires is hosting it somewhere without an ephemeral file system.
+
 ## Contributing
 Send a pull request or open an issue.
 
 Please also update tests to reflect those changes.
 
 ## License
-[MIT](LICENSE) &copy; 2019
+[MIT](LICENSE) © 2019
 
 [sinatra]: http://sinatrarb.com/
 [ttt]: http://just-a-tic-tac-toe-app.herokuapp.com/
@@ -123,3 +152,4 @@ Please also update tests to reflect those changes.
 [github]: https://github.com/johnisom/sinatra_timemanager/
 [python-tm]: https://github.com/johnisom/time_manager/
 [ls]: https://launchschool.com/
+[bcrypt]: https://github.com/codahale/bcrypt-ruby
