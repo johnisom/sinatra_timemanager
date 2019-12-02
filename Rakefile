@@ -3,6 +3,14 @@
 require 'rake/testtask'
 require 'find'
 
+desc 'Rubocop, bye_emacs, test, and super_git all in one'
+task :super, [:message] do |_, args|
+  Rake::Task[:rubocop].execute
+  Rake::Task[:bye_emacs].execute
+  Rake::Task[:test].execute
+  Rake::Task[:super_git].execute(message: args.message)
+end
+
 desc 'Run tests'
 task default: :test
 
@@ -33,11 +41,13 @@ desc 'Alias of inventory'
 task tree: :inventory
 
 desc 'Automatically fix simple errors with rubocop'
-task :rubocop, [:arg] do |_, args|
-  case args[:arg]
+task :rubocop, [:option] do |_, args|
+  case args[:option]
   when 'no-fix' then sh 'rubocop .'
   else sh 'rubocop -a .'
   end
+rescue RuntimeError => e
+  abort unless e.message =~ /Command failed with status/
 end
 
 desc 'Give wc info for all files in the project that I wrote.'
@@ -46,7 +56,7 @@ task :wc do
              Gemfile
              Procfile
              config.ru
-             README.md
+             n README.md
              time_manager.rb
              data/test.yml
              public/stylesheets/time_manager.css] +
@@ -61,13 +71,14 @@ desc 'Remove all emacs backup files'
 task :bye_emacs do
   files = Dir['**/*~'].join(' ')
   sh "rm #{files}"
+rescue RuntimeError => e
+  abort unless e.message =~ /Command failed with status/
 end
 
 desc 'Add all files and commit with message, pushing to remote repos.'
 task :super_git, [:message] do |_, args|
-  message = args[:message]
   remotes = `git remote`.split
   sh 'git add .'
-  sh %(git commit -m "#{message}")
+  sh %(git commit -m "#{args[:message]}")
   remotes.each { |remote| sh "git push #{remote}" }
 end
