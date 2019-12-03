@@ -103,7 +103,7 @@ TL;DR: Inspired by [this][python-tm].
 
 The design and idea for this app comes from a similar command-line application that I had previously made with Python. The Github repository for that project can be found [here][python-tm]. The impact that my command-line version had on the web application becomes very apparent when you look at the [View][view] page.
 
-I created the original command-line version of this application partly in response to a challenge of getting 400 hours in between 2019-11-08–2019-12-31 and partly because I didn't have any idea where my time was *actually* going. At the very least, I needed a tool to help me to track just the raw time going towards study-related stuff, and I didn't want to have to learn to use Microsoft Excel or to manually calculate the time.
+I created the original command-line version of this application partly in response to a challenge of getting 400 good hours of Launch School studying in between 2019-11-08–2019-12-31 and partly because I didn't have any idea where my time was *actually* going. At the very least, I needed a tool to help me to track just the raw time going towards study-related stuff, and I didn't want to have to learn to use Microsoft Excel or to manually calculate the time.
 
 Out of this desire came a command-line prototype, implemented in Python, that allowed me to track my raw time as well as displaying each study session. I could just type `time-manager john start` and `time-manager john stop` into my terminal, carefree, and it would take care of it all for me.
 
