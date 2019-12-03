@@ -56,7 +56,7 @@ task :wc do
              Gemfile
              Procfile
              config.ru
-             n README.md
+             README.md
              time_manager.rb
              data/test.yml
              public/stylesheets/time_manager.css] +
@@ -70,9 +70,7 @@ end
 desc 'Remove all emacs backup files'
 task :bye_emacs do
   files = Dir['**/*~'].join(' ')
-  sh "rm #{files}"
-rescue RuntimeError => e
-  abort unless e.message =~ /Command failed with status/
+  sh "rm #{files}" unless files.empty?
 end
 
 desc 'Add all files and commit with message, pushing to remote repos.'
