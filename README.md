@@ -1,4 +1,5 @@
 # Time Manager
+## Effectively Track and Intelligently View Your Productive Hours
 
 [![Build Status](https://travis-ci.org/johnisom/sinatra_timemanager.svg?branch=master)](https://travis-ci.org/johnisom/sinatra_timemanager)
 [![Coverage Status](https://coveralls.io/repos/github/johnisom/sinatra_timemanager/badge.svg?branch=master)](https://coveralls.io/github/johnisom/sinatra_timemanager?branch=master)
