@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/content_for'
 require 'sinatra/reloader' if development?
 require 'tilt/erubis'
@@ -11,16 +12,10 @@ require 'pg'
 
 require_relative 'lib/tm'
 
-CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
-CREDS_PATH = File.expand_path('credentials', CURR_PATH)
-DATA_PATH = File.expand_path('data', CURR_PATH)
-
 configure do
   enable :sessions
   set :session_secret, development? ? 'secret' : SecureRandom.hex(100)
   set :erb, escape_html: true
-
-  FileUtils.mkdir_p(CREDS_PATH) unless File.directory?(CREDS_PATH)
 end
 
 def flash(message, type = :neutral)
@@ -28,7 +23,7 @@ def flash(message, type = :neutral)
 end
 
 def credentials
-  connection = if production?
+  connection = if Sinatra::Base.production?
                  PG.connect(ENV['DATABASE_URL'])
                else
                  PG.connect(dbname: 'time_manager')
@@ -86,7 +81,7 @@ def error_for_password(password)
 end
 
 def create_user(username, password)
-  connection = if production?
+  connection = if Sinatra::Base.production?
                  PG.connect(ENV['DATABASE_URL'])
                else
                  PG.connect(dbname: 'time_manager')

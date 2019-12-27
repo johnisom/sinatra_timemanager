@@ -102,17 +102,17 @@ class SignedOutTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_post_sign_up_successful
-    post '/sign-up', username: 'tmp', password: 'tmp123@#'
+    post '/sign-up', username: @tmp_uname, password: 'tmp123@#'
 
     assert_equal 302, last_response.status
-    assert_flash 'Welcome aboard, tmp!', :success
+    assert_flash "Welcome aboard, #{@tmp_uname}!", :success
 
     # follow redirect back to home/index page
     get last_response['Location']
 
     assert_status_and_content_type
     assert_footer
-    assert_displayed_flash 'Welcome aboard, tmp!', :success
+    assert_displayed_flash "Welcome aboard, #{@tmp_uname}!", :success
   end
 
   def test_post_sign_up_username_too_short

@@ -3,6 +3,7 @@
 require 'rack/test'
 require 'minitest/test'
 require 'fileutils'
+require 'pg'
 
 require_relative '../time_manager'
 require_relative 'base_assertions'
@@ -16,6 +17,21 @@ class BaseTest < Minitest::Test
     Sinatra::Application
   end
 
+  def setup
+    @tmp_uname = SecureRandom.hex(5)
+  end
+
+  def teardown
+    connection = PG.connect(dbname: 'time_manager')
+
+    connection.exec_params(<<~SQL, [@tmp_uname])
+      DELETE FROM users
+       WHERE username = $1;
+    SQL
+
+    connection.close
+  end
+
   def auth_error_message(magic_word)
     "You must be signed #{magic_word} to do that."
   end
@@ -26,32 +42,6 @@ class BaseTest < Minitest::Test
 
   def flash
     last_request.env['rack.session'][:flash]
-  end
-
-  def copy_credentials
-    tmp_creds_file_path = File.join(::CREDS_PATH, 'credentials.yml')
-    creds_file_path = File.expand_path('../credentials/credentials.yml',
-                                       ::CURR_PATH)
-    content = File.read(creds_file_path)
-    File.write(tmp_creds_file_path, content)
-  end
-
-  def copy_data
-    tmp_data_file_path = File.join(::DATA_PATH, 'test.yml')
-    data_file_path = File.expand_path('../data/test.yml', ::CURR_PATH)
-    content = File.read(data_file_path)
-    File.write(tmp_data_file_path, content)
-  end
-
-  def setup
-    FileUtils.mkdir_p(::CREDS_PATH)
-    FileUtils.mkdir_p(::DATA_PATH)
-    copy_credentials
-    copy_data
-  end
-
-  def teardown
-    FileUtils.rm_r(::CURR_PATH)
   end
 
   def test_index

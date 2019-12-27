@@ -21,18 +21,16 @@ end
 class TM
   include Viewable
 
-  CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
-  DATA_PATH = File.expand_path('data', CURR_PATH)
-
   attr_reader :sessions
 
   def initialize(name)
     @db = if Sinatra::Base.production?
             PG.connect(ENV['DATABASE_URL'])
           else
-            PG.connect(dbname: "todos")
+            PG.connect(dbname: 'time_manager')
           end
     @username = name.gsub(/\W/, '')
+    # require 'pry';binding.pry
     @user_id = @db.exec_params(<<~SQL, [@username]).first['id'].to_i
       SELECT id
         FROM users
@@ -105,17 +103,6 @@ class TM
   end
 
   private
-
-  def update_file
-    filepath = File.join(DATA_PATH, "#{@username}.yml")
-    content = Psych.dump(@sessions)
-    File.write(filepath, content)
-  end
-
-  def touchfile(name)
-    Dir.mkdir(DATA_PATH) unless File.directory?(DATA_PATH)
-    FileUtils.touch(File.join(DATA_PATH, "#{name}.yml"))
-  end
 
   def get_sessions
     @db.exec_params(<<~SQL, [@user_id]).map do |tup|

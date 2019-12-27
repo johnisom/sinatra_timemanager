@@ -80,7 +80,8 @@ class SignedInTest < BaseTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_post_sign_up
-    assert_post_authorization '/sign-up', username: 'hi', password: 'w0rld$8d'
+    assert_post_authorization '/sign-up', username: @tmp_uname,
+                              password: 'w0rld$8d'
   end
 
   def test_get_sign_out
