@@ -28,7 +28,11 @@ def flash(message, type = :neutral)
 end
 
 def credentials
-  connection = PG.connect(dbname: 'time_manager')
+  connection = if production?
+                 PG.connect(ENV['DATABASE_URL'])
+               else
+                 PG.connect(dbname: 'time_manager')
+               end
 
   creds = connection.exec(<<~SQL).map do |tup|
       SELECT username, password_hash
@@ -82,7 +86,11 @@ def error_for_password(password)
 end
 
 def create_user(username, password)
-  connection = PG.connect(dbname: 'time_manager')
+  connection = if production?
+                 PG.connect(ENV['DATABASE_URL'])
+               else
+                 PG.connect(dbname: 'time_manager')
+               end
 
   password_hash = BCrypt::Password.create(password).to_s
   connection.exec_params(<<~SQL, [username, password_hash])

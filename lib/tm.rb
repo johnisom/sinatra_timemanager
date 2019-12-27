@@ -27,7 +27,11 @@ class TM
   attr_reader :sessions
 
   def initialize(name)
-    @db = PG.connect(dbname: 'time_manager')
+    @db = if Sinatra::Base.production?
+            PG.connect(ENV['DATABASE_URL'])
+          else
+            PG.connect(dbname: "todos")
+          end
     @username = name.gsub(/\W/, '')
     @user_id = @db.exec_params(<<~SQL, [@username]).first['id'].to_i
       SELECT id
