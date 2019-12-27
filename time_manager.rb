@@ -29,13 +29,16 @@ end
 
 def credentials
   connection = PG.connect(dbname: 'time_manager')
+
   creds = connection.exec(<<~SQL).map do |tup|
       SELECT username, password_hash
         FROM users;
     SQL
     tup.values
   end
+
   connection.close
+
   creds.to_h
 end
 
@@ -79,9 +82,15 @@ def error_for_password(password)
 end
 
 def create_user(username, password)
-  new_creds = credentials
-  new_creds[username] = BCrypt::Password.create(password).to_s
-  File.write(File.join(CREDS_PATH, 'credentials.yml'), Psych.dump(new_creds))
+  connection = PG.connect(dbname: 'time_manager')
+
+  password_hash = BCrypt::Password.create(password).to_s
+  connection.exec_params(<<~SQL, [username, password_hash])
+    INSERT INTO users (username, password_hash)
+    VALUES ($1, $2);
+  SQL
+
+  connection.close
 end
 
 def check_unauthorization
