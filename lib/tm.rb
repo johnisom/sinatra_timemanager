@@ -29,10 +29,12 @@ class TM
   def initialize(name)
     @db = PG.connect(dbname: 'time_manager')
     @username = name.gsub(/\W/, '')
-    # touchfile(@username)
-    # @sessions = Psych.load_file(File.join(DATA_PATH, "#{@username}.yml"))
-    @sessions = get_sessions(@username)
-    @sessions = [] unless @sessions.instance_of?(Array)
+    @user_id = @db.exec_params(<<~SQL, [@username]).first['id'].to_i
+      SELECT id
+        FROM users
+       WHERE username = $1;
+    SQL
+    @sessions = get_sessions
   end
 
   def start(message: nil)
@@ -42,14 +44,28 @@ class TM
 
     @sessions << Session.new(start: Entry.new(message))
 
-    update_file
+    @db.exec_params(<<~SQL, [message, @user_id])
+      INSERT INTO sessions (start_message, user_id, stop_time)
+      VALUES ($1, $2, NULL);
+    SQL
   end
 
   def stop(message: nil)
     raise StopTwiceError, "Can't stop twice in a row!" if last_session.complete?
 
     last_session.stop = Entry.new(message)
-    update_file
+
+    @db.exec_params(<<~SQL, [message, @user_id])
+      UPDATE sessions
+         SET stop_message = $1,
+             stop_time = DEFAULT
+       WHERE user_id = $2
+             AND id =
+             (SELECT id
+                FROM sessions
+               ORDER BY start_time DESC
+               LIMIT 1);
+    SQL
   end
 
   def undo
@@ -57,10 +73,27 @@ class TM
 
     if last_session.complete?
       last_session.stop = nil
+      @db.exec(<<~SQL)
+        UPDATE sessions
+           SET stop_time = NULL,
+               stop_message = NULL
+         WHERE id =
+               (SELECT id
+                  FROM sessions
+                 ORDER BY start_time DESC
+                 LIMIT 1);
+      SQL
     else
       @sessions.pop
+      @db.exec(<<~SQL)
+        DELETE FROM sessions
+         WHERE id =
+               (SELECT id
+                  FROM sessions
+                 ORDER BY start_time DESC
+                 LIMIT 1);
+      SQL
     end
-    update_file
   end
 
   def last_session
@@ -80,21 +113,21 @@ class TM
     FileUtils.touch(File.join(DATA_PATH, "#{name}.yml"))
   end
 
-  def get_sessions(username)
-    @db.exec_params(<<~SQL, [username]).map do |tup|
-        SELECT s.start_time, s.start_message,
-               s.stop_time, s.stop_message
-          FROM sessions AS s
-               INNER JOIN users AS u
-               ON u.id = s.user_id
-         WHERE u.username = $1
-         ORDER BY s.start_time ASC;
-      SQL
+  def get_sessions
+    @db.exec_params(<<~SQL, [@user_id]).map do |tup|
+      SELECT s.start_time, s.start_message,
+             s.stop_time, s.stop_message
+        FROM sessions AS s
+             INNER JOIN users AS u
+             ON u.id = s.user_id
+       WHERE u.id = $1
+       ORDER BY s.start_time ASC;
+    SQL
       start_entry = Entry.new(tup['start_message'],
-                              DateTime.parse(tup['start_time']))
+                              Time.parse(tup['start_time']))
       stop_entry = tup['stop_time'] &&
                    Entry.new(tup['stop_message'],
-                             DateTime.parse(tup['stop_time']))
+                             Time.parse(tup['stop_time']))
       Session.new(start: start_entry, stop: stop_entry)
     end
   end
