@@ -7,6 +7,7 @@ require 'tilt/erubis'
 require 'bcrypt'
 require 'securerandom'
 require 'yaml'
+require 'pg'
 
 require_relative 'lib/tm'
 
@@ -27,8 +28,15 @@ def flash(message, type = :neutral)
 end
 
 def credentials
-  FileUtils.touch(File.join(CREDS_PATH, 'credentials.yml'))
-  Psych.load_file(File.join(CREDS_PATH, 'credentials.yml')) || {}
+  connection = PG.connect(dbname: 'time_manager')
+  creds = connection.exec(<<~SQL).map do |tup|
+      SELECT username, password_hash
+        FROM users;
+    SQL
+    tup.values
+  end
+  connection.close
+  creds.to_h
 end
 
 def valid_credentials?(username, password)

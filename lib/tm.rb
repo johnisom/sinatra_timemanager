@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'pg'
 require 'yaml'
 
 require_relative 'entry'
@@ -26,9 +27,11 @@ class TM
   attr_reader :sessions
 
   def initialize(name)
+    @db = PG.connect(dbname: 'time_manager')
     @username = name.gsub(/\W/, '')
-    touchfile(@username)
-    @sessions = Psych.load_file(File.join(DATA_PATH, "#{@username}.yml"))
+    # touchfile(@username)
+    # @sessions = Psych.load_file(File.join(DATA_PATH, "#{@username}.yml"))
+    @sessions = get_sessions(@username)
     @sessions = [] unless @sessions.instance_of?(Array)
   end
 
@@ -75,5 +78,24 @@ class TM
   def touchfile(name)
     Dir.mkdir(DATA_PATH) unless File.directory?(DATA_PATH)
     FileUtils.touch(File.join(DATA_PATH, "#{name}.yml"))
+  end
+
+  def get_sessions(username)
+    @db.exec_params(<<~SQL, [username]).map do |tup|
+        SELECT s.start_time, s.start_message,
+               s.stop_time, s.stop_message
+          FROM sessions AS s
+               INNER JOIN users AS u
+               ON u.id = s.user_id
+         WHERE u.username = $1
+         ORDER BY s.start_time ASC;
+      SQL
+      start_entry = Entry.new(tup['start_message'],
+                              DateTime.parse(tup['start_time']))
+      stop_entry = tup['stop_time'] &&
+                   Entry.new(tup['stop_message'],
+                             DateTime.parse(tup['stop_time']))
+      Session.new(start: start_entry, stop: stop_entry)
+    end
   end
 end

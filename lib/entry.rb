@@ -10,8 +10,8 @@ class Entry
 
   attr_reader :message, :time
 
-  def initialize(message)
-    @time = Time.now
+  def initialize(message, time = nil)
+    @time = time || Time.now
     @message = Rack::Utils.escape_html(message)
   end
 
