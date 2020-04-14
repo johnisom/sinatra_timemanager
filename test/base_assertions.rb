@@ -32,7 +32,7 @@ module BaseAssertions
     assertions = ['<footer class="flex evenly">',
                   'href="https://github.com/johnisom/sinatra_timemanager"',
                   '<img width="50px" src="/images/github.png">',
-                  'John Isom', '<small class="name">&copy; 2019</small>']
+                  'John Isom', '<small class="name">&copy; 2020</small>']
 
     refutations = []
 
