@@ -103,7 +103,7 @@ Here is an example with Timeframe set from *19* to *13* days ago with the view o
   <img alt="Sign Out Page" src="examples/sign-out.png" width="750px">
 </p>
 
-Once you've finished using the application, go ahead and sign out. While not mandantory, it is reccommended as your session will last the duration that Heorku's dyno is up and running, which is approximately a full day.
+Once you've finished using the application, go ahead and sign out. While not mandantory, it is recommended as your session will last the duration that Heorku's dyno is up and running, which is approximately a full day.
 
 ## Inspiration ##
 
