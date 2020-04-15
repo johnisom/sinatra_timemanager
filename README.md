@@ -1,5 +1,5 @@
-# Time Manager
-## Effectively Track and Intelligently View Your Productive Hours
+# Time Manager #
+## Effectively Track and Intelligently View Your Productive Hours ##
 
 [![Build Status](https://travis-ci.org/johnisom/sinatra_timemanager.svg?branch=master)](https://travis-ci.org/johnisom/sinatra_timemanager)
 [![Coverage Status](https://coveralls.io/repos/github/johnisom/sinatra_timemanager/badge.svg?branch=master)](https://coveralls.io/github/johnisom/sinatra_timemanager?branch=master)
@@ -11,11 +11,12 @@ Time Manager is a [Sinatra][sinatra] web application for tracking study/work tim
 
 This app was created as an optional project for [Launch School][ls]'s RB175 course. The two other optional projects I created are the games [Tic Tac Toe][ttt] and [Twenty-One][twenty-one].
 
-## Usage
+## Usage ##
 
 Additional help and instructions on how to use this application can be found on the [help section][help] of the app website.
 
-### 1) Go To [The Time Manager][time-manager]
+### 1) Go To [The Time Manager][time-manager] ###
+
 <p align="center">
   <img alt="Home Page Signed Out" src="examples/home-signed-out.png" width="750px">
 </p>
@@ -23,7 +24,8 @@ Additional help and instructions on how to use this application can be found on 
 Here you'll find all the links and pages that you can access in your current state of being signed out,
 as well as simple first time instructions on the home (current) page.
 
-### 2) Go To The [Help Page][help]
+### 2) Go To The [Help Page][help] ###
+
 <p align="center">
   <img alt="Help Page" src="examples/help.png" width="750px">
 </p>
@@ -31,7 +33,8 @@ as well as simple first time instructions on the home (current) page.
 Here you can read up on all of the different commands: what they do and how to use them.
 It is suggested you read this whole section before using this application.
 
-### 3) [Sign In][sign-in]
+### 3) [Sign In][sign-in] ###
+
 <p align="center">
   <img alt="Sign In Page" src="examples/sign-in.png" width="750px">
 </p>
@@ -45,7 +48,8 @@ at the bottom of the *About* section:
 </p>
 
 
-### 4) Or, Alternatively, [Sign Up][sign-up]
+### 4) Or, Alternatively, [Sign Up][sign-up] ###
+
 <p align="center">
   <img alt="Sign Up Page" src="examples/sign-up.png" width="750px">
 </p>
@@ -66,7 +70,8 @@ of which is highligthed in this screenshot:
   <img alt="Signed In Header with 'About' Highlighted" src="examples/header-signed-in.png" width="750px">
 </p>
 
-### 5) Do An Action
+### 5) Do An Action ###
+
 <p align="center">
   <img alt="Actions Page" src="examples/actions.png" width="750px">
 </p>
@@ -75,7 +80,8 @@ This is the control terminal of the application. You can start your time, stop i
 Get familiar with it. I suggest you read up on [Start][start], [Stop][stop], and [Undo][undo] on the [help][help] page.
 Be careful with the actions that you commit here. Currently, there is no feature to edit a previously started/stopped time or message, only to delete the last entry, whether it was a start or a stop.
 
-### 6) View Logged Time
+### 6) View Logged Time ###
+
 <p align="center">
   <img alt="Default View Page" src="examples/view-default.png" width="750px">
 </p>
@@ -91,14 +97,15 @@ Here is an example with Timeframe set from *19* to *13* days ago with the view o
   <img alt="Scrolling View" src="examples/scroll.gif">
 </p>
 
-### 7) Sign Out (optional)
+### 7) Sign Out (optional) ###
+
 <p align="center">
   <img alt="Sign Out Page" src="examples/sign-out.png" width="750px">
 </p>
 
 Once you've finished using the application, go ahead and sign out. While not mandantory, it is reccommended as your session will last the duration that Heorku's dyno is up and running, which is approximately a full day.
 
-## Inspiration
+## Inspiration ##
 
 TL;DR: Inspired by [this][python-tm].
 
@@ -120,7 +127,7 @@ They required lots of logic to summarize and display and separate, which is refl
 
 After many more iterations of this cycle, I found myself with a command-line application to use on the daily as well as a web aplication to demonstrate my abilities and give my programmings skills a little stretch.
 
-## Limitations
+## Limitations ##
 
 This is a fully-functional application that can store usernames and [bcrypt][bcrypt] encrypted password hashes. However, the server that it is hosted on, Heroku, does not support these features, as breifly explained in this disclaimer:
 <p align="center">
@@ -129,12 +136,23 @@ This is a fully-functional application that can store usernames and [bcrypt][bcr
 
 I don't plan on making the web version have permanent accounts or data storage anytime soon, but if requests for that come in, I'll consider it because all it requires is hosting it somewhere without an ephemeral file system.
 
-## Contributing
+## Installation ##
+
+1. Clone this repository (`git clone https://github.com/johbnisom/sinatra_timemanager.git`)
+2. `cd` into the repository (`cd sinatra_timemanager`)
+3. Install dependencies (`bundle install`)
+   - If you don’t have ruby-2.6.5, install it
+4. Ensure that all tests are passing (`bundle exec rake`)
+5. Run the server locally (`bundle exec rackup`)
+6. Enjoy tracking and managing your time at http://localhost:9292/
+
+## Contributing ##
+
 Send a pull request or open an issue.
 
 Please also update tests to reflect those changes.
 
-## License
+## License ##
 [MIT](LICENSE) © 2019
 
 [sinatra]: http://sinatrarb.com/
