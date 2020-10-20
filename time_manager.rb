@@ -108,20 +108,17 @@ end
 
 get '/view' do
   check_authorization
-
-  begin
-    @content = TM.new(session[:username]).view(params[:timeframe_from],
-                                               params[:timeframe_to],
-                                               params[:view_option])
-    erb :view
-  rescue NoViewDataError => e
-    flash(e.message, :danger)
-    redirect '/actions'
-  rescue InvalidFiltersError => e
-    flash(e.message, :danger)
-    @content = '<div id="shrug">¯\_(ツ)_/¯</div>'
-    erb :view
-  end
+  @content = TM.new(session[:username]).view(params[:timeframe_from],
+                                             params[:timeframe_to],
+                                             params[:view_option])
+  erb :view
+rescue Viewable::NoViewDataError => e
+  flash(e.message, :danger)
+  redirect '/actions'
+rescue Viewable::InvalidFiltersError => e
+  flash(e.message, :danger)
+  @content = '<div id="shrug">¯\_(ツ)_/¯</div>'
+  erb :view
 end
 
 get '/actions' do
@@ -203,7 +200,7 @@ post '/start' do
   TM.new(session[:username]).start(message: message)
   flash('Time started.')
   redirect '/actions'
-rescue StartTwiceError => e
+rescue TM::StartTwiceError => e
   flash(e.message, :danger)
   erb :actions
 end
@@ -215,7 +212,7 @@ post '/stop' do
   TM.new(session[:username]).stop(message: message)
   flash('Time stopped.')
   redirect '/actions'
-rescue StopTwiceError => e
+rescue TM::StopTwiceError => e
   flash(e.message, :danger)
   erb :actions
 end
@@ -226,7 +223,7 @@ post '/undo' do
   TM.new(session[:username]).undo
   flash('Last entry undone.')
   redirect '/actions'
-rescue MaxUndoError => e
+rescue TM::MaxUndoError => e
   flash(e.message, :danger)
   erb :actions
 end

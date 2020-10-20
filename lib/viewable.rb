@@ -9,14 +9,14 @@ require_relative 'weekly_digest'
 require_relative 'week_delimited'
 require_relative 'timeable'
 
-class NoViewDataError < StandardError
-end
-
-class InvalidFiltersError < StandardError
-end
-
 # Viewable module to add view methods to TimeManager class
 module Viewable
+  class NoViewDataError < StandardError
+  end
+
+  class InvalidFiltersError < StandardError
+  end
+
   include Default
   include DailyDigest
   include DayDelimited

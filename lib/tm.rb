@@ -7,17 +7,17 @@ require_relative 'entry'
 require_relative 'session'
 require_relative 'viewable'
 
-class StartTwiceError < StandardError
-end
-
-class StopTwiceError < StandardError
-end
-
-class MaxUndoError < StandardError
-end
-
 # Main app that handles everything
 class TM
+  class StartTwiceError < StandardError
+  end
+
+  class StopTwiceError < StandardError
+  end
+
+  class MaxUndoError < StandardError
+  end
+
   include Viewable
 
   CURR_PATH = ENV['RACK_ENV'] == 'test' ? 'tmp' : '.'
